@@ -10,7 +10,7 @@ sudo apt update && sudo apt install -y docker.io docker-compose-plugin
 sudo usermod -aG docker $USER && newgrp docker
 
 # 2. Run the flow (uses standard k4_N4 architecture with 16-bit counter benchmark)
-cd Experiments
+cd Memristor_FPGA
 docker compose run --rm openfpga bash -c "
   cd /opt/openfpga && \
   python3 openfpga_flow/scripts/run_fpga_task.py \
@@ -29,7 +29,7 @@ ls -la runs/latest/
 ## Project Structure
 
 ```
-Experiments/
+Memristor_FPGA/
 ├── docker-compose.yml              # Docker Compose with volume mounts
 ├── config/
 │   ├── task.conf                   # OpenFPGA task configuration

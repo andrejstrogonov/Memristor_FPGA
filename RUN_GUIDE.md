@@ -54,7 +54,7 @@ docker compose version
 ## Структура проекта
 
 ```
-F:\Kirill\Experiments\                    # Корневая директория проекта
+F:\Kirill\Memristor_FPGA\                    # Корневая директория проекта
 ├── docker-compose.yml                    # Конфигурация Docker Compose
 ├── config/
 │   ├── task.conf                         # Конфигурация OpenFPGA flow
@@ -88,11 +88,11 @@ F:\Kirill\Experiments\                    # Корневая директори�
 ```bash
 # Если проект в git репозитории
 git clone <repository_url>
-cd Experiments
+cd Memristor_FPGA
 
-# Или просто скопируйте папку Experiments в домашнюю директорию
-cp -r /путь/к/Experiments ~/Experiments
-cd ~/Experiments
+# Или просто скопируйте папку Memristor_FPGA в домашнюю директорию
+cp -r /путь/к/Memristor_FPGA ~/Memristor_FPGA
+cd ~/Memristor_FPGA
 ```
 
 ### 2. Базовый запуск (полный flow: Yosys → VPR → OpenFPGA Shell)
@@ -228,7 +228,7 @@ cd /opt/openfpga/openfpga_flow/tasks/memristor_fir
 ### Ошибка: "permission denied" на volume mounts
 ```bash
 # На Linux может потребоваться:
-sudo chown -R $USER:$USER ~/Experiments
+sudo chown -R $USER:$USER ~/Memristor_FPGA
 # Или запуск с --user root (в docker-compose.yml)
 ```
 

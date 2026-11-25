@@ -369,7 +369,7 @@ INFO - 00_counterup16_1clk_posedge_sync_resetp_DEFAULT Finished with returncode 
 ## Приложение А: Структура репозитория проекта
 
 ```
-Experiments/
+Memristor_FPGA/
 ├── docker-compose.yml          # Docker Compose конфигурация
 ├── config/
 │   ├── task.conf               # OpenFPGA task configuration
@@ -405,7 +405,7 @@ sudo apt update && sudo apt install -y docker.io docker-compose-plugin
 sudo usermod -aG docker $USER && newgrp docker
 
 # 2. Запуск базового flow (CMOS свитчи, счетчик)
-cd Experiments
+cd Memristor_FPGA
 docker compose run --rm openfpga bash -c "
   cd /opt/openfpga && \
   python3 openfpga_flow/scripts/run_fpga_task.py \
