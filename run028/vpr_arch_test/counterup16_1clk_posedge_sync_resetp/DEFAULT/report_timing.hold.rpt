@@ -1,0 +1,933 @@
+#Timing report of worst 32 path(s)
+# Unit scale: 1e-09 seconds
+# Output precision: 3
+
+#Path 1
+Startpoint: count[0].Q[0] (.latch clocked by clock0)
+Endpoint  : count[0].D[0] (.latch clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[0].clk[0] (.latch)                                         0.000     0.000
+count[0].Q[0] (.latch) [clock-to-output]                         0.124     0.124
+$0\count[15:0][0].in[1] (.names)                                 0.000     0.124
+$0\count[15:0][0].out[0] (.names)                                0.261     0.385
+count[0].D[0] (.latch)                                           0.000     0.385
+data arrival time                                                          0.385
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[0].clk[0] (.latch)                                         0.000     0.000
+clock uncertainty                                                0.000     0.000
+cell hold time                                                   0.066     0.066
+data required time                                                         0.066
+--------------------------------------------------------------------------------
+data required time                                                        -0.066
+data arrival time                                                          0.385
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.319
+
+
+#Path 2
+Startpoint: count[15].Q[0] (.latch clocked by clock0)
+Endpoint  : count[15].D[0] (.latch clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[15].clk[0] (.latch)                                        0.000     0.000
+count[15].Q[0] (.latch) [clock-to-output]                        0.124     0.124
+$0\count[15:0][15].in[0] (.names)                                0.000     0.124
+$0\count[15:0][15].out[0] (.names)                               0.261     0.385
+count[15].D[0] (.latch)                                          0.000     0.385
+data arrival time                                                          0.385
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[15].clk[0] (.latch)                                        0.000     0.000
+clock uncertainty                                                0.000     0.000
+cell hold time                                                   0.066     0.066
+data required time                                                         0.066
+--------------------------------------------------------------------------------
+data required time                                                        -0.066
+data arrival time                                                          0.385
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.319
+
+
+#Path 3
+Startpoint: count[12].Q[0] (.latch clocked by clock0)
+Endpoint  : count[12].D[0] (.latch clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[12].clk[0] (.latch)                                        0.000     0.000
+count[12].Q[0] (.latch) [clock-to-output]                        0.124     0.124
+$0\count[15:0][12].in[0] (.names)                                0.000     0.124
+$0\count[15:0][12].out[0] (.names)                               0.261     0.385
+count[12].D[0] (.latch)                                          0.000     0.385
+data arrival time                                                          0.385
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[12].clk[0] (.latch)                                        0.000     0.000
+clock uncertainty                                                0.000     0.000
+cell hold time                                                   0.066     0.066
+data required time                                                         0.066
+--------------------------------------------------------------------------------
+data required time                                                        -0.066
+data arrival time                                                          0.385
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.319
+
+
+#Path 4
+Startpoint: count[13].Q[0] (.latch clocked by clock0)
+Endpoint  : count[13].D[0] (.latch clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[13].clk[0] (.latch)                                        0.000     0.000
+count[13].Q[0] (.latch) [clock-to-output]                        0.124     0.124
+$0\count[15:0][13].in[0] (.names)                                0.000     0.124
+$0\count[15:0][13].out[0] (.names)                               0.261     0.385
+count[13].D[0] (.latch)                                          0.000     0.385
+data arrival time                                                          0.385
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[13].clk[0] (.latch)                                        0.000     0.000
+clock uncertainty                                                0.000     0.000
+cell hold time                                                   0.066     0.066
+data required time                                                         0.066
+--------------------------------------------------------------------------------
+data required time                                                        -0.066
+data arrival time                                                          0.385
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.319
+
+
+#Path 5
+Startpoint: count[14].Q[0] (.latch clocked by clock0)
+Endpoint  : count[14].D[0] (.latch clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[14].clk[0] (.latch)                                        0.000     0.000
+count[14].Q[0] (.latch) [clock-to-output]                        0.124     0.124
+$0\count[15:0][14].in[0] (.names)                                0.000     0.124
+$0\count[15:0][14].out[0] (.names)                               0.261     0.385
+count[14].D[0] (.latch)                                          0.000     0.385
+data arrival time                                                          0.385
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[14].clk[0] (.latch)                                        0.000     0.000
+clock uncertainty                                                0.000     0.000
+cell hold time                                                   0.066     0.066
+data required time                                                         0.066
+--------------------------------------------------------------------------------
+data required time                                                        -0.066
+data arrival time                                                          0.385
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.319
+
+
+#Path 6
+Startpoint: count[9].Q[0] (.latch clocked by clock0)
+Endpoint  : count[9].D[0] (.latch clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[9].clk[0] (.latch)                                         0.000     0.000
+count[9].Q[0] (.latch) [clock-to-output]                         0.124     0.124
+$0\count[15:0][9].in[0] (.names)                                 0.000     0.124
+$0\count[15:0][9].out[0] (.names)                                0.261     0.385
+count[9].D[0] (.latch)                                           0.000     0.385
+data arrival time                                                          0.385
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[9].clk[0] (.latch)                                         0.000     0.000
+clock uncertainty                                                0.000     0.000
+cell hold time                                                   0.066     0.066
+data required time                                                         0.066
+--------------------------------------------------------------------------------
+data required time                                                        -0.066
+data arrival time                                                          0.385
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.319
+
+
+#Path 7
+Startpoint: count[10].Q[0] (.latch clocked by clock0)
+Endpoint  : count[10].D[0] (.latch clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[10].clk[0] (.latch)                                        0.000     0.000
+count[10].Q[0] (.latch) [clock-to-output]                        0.124     0.124
+$0\count[15:0][10].in[0] (.names)                                0.000     0.124
+$0\count[15:0][10].out[0] (.names)                               0.261     0.385
+count[10].D[0] (.latch)                                          0.000     0.385
+data arrival time                                                          0.385
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[10].clk[0] (.latch)                                        0.000     0.000
+clock uncertainty                                                0.000     0.000
+cell hold time                                                   0.066     0.066
+data required time                                                         0.066
+--------------------------------------------------------------------------------
+data required time                                                        -0.066
+data arrival time                                                          0.385
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.319
+
+
+#Path 8
+Startpoint: count[11].Q[0] (.latch clocked by clock0)
+Endpoint  : count[11].D[0] (.latch clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[11].clk[0] (.latch)                                        0.000     0.000
+count[11].Q[0] (.latch) [clock-to-output]                        0.124     0.124
+$0\count[15:0][11].in[0] (.names)                                0.000     0.124
+$0\count[15:0][11].out[0] (.names)                               0.261     0.385
+count[11].D[0] (.latch)                                          0.000     0.385
+data arrival time                                                          0.385
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[11].clk[0] (.latch)                                        0.000     0.000
+clock uncertainty                                                0.000     0.000
+cell hold time                                                   0.066     0.066
+data required time                                                         0.066
+--------------------------------------------------------------------------------
+data required time                                                        -0.066
+data arrival time                                                          0.385
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.319
+
+
+#Path 9
+Startpoint: count[6].Q[0] (.latch clocked by clock0)
+Endpoint  : count[6].D[0] (.latch clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[6].clk[0] (.latch)                                         0.000     0.000
+count[6].Q[0] (.latch) [clock-to-output]                         0.124     0.124
+$0\count[15:0][6].in[0] (.names)                                 0.000     0.124
+$0\count[15:0][6].out[0] (.names)                                0.261     0.385
+count[6].D[0] (.latch)                                           0.000     0.385
+data arrival time                                                          0.385
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[6].clk[0] (.latch)                                         0.000     0.000
+clock uncertainty                                                0.000     0.000
+cell hold time                                                   0.066     0.066
+data required time                                                         0.066
+--------------------------------------------------------------------------------
+data required time                                                        -0.066
+data arrival time                                                          0.385
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.319
+
+
+#Path 10
+Startpoint: count[7].Q[0] (.latch clocked by clock0)
+Endpoint  : count[7].D[0] (.latch clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[7].clk[0] (.latch)                                         0.000     0.000
+count[7].Q[0] (.latch) [clock-to-output]                         0.124     0.124
+$0\count[15:0][7].in[0] (.names)                                 0.000     0.124
+$0\count[15:0][7].out[0] (.names)                                0.261     0.385
+count[7].D[0] (.latch)                                           0.000     0.385
+data arrival time                                                          0.385
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[7].clk[0] (.latch)                                         0.000     0.000
+clock uncertainty                                                0.000     0.000
+cell hold time                                                   0.066     0.066
+data required time                                                         0.066
+--------------------------------------------------------------------------------
+data required time                                                        -0.066
+data arrival time                                                          0.385
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.319
+
+
+#Path 11
+Startpoint: count[8].Q[0] (.latch clocked by clock0)
+Endpoint  : count[8].D[0] (.latch clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[8].clk[0] (.latch)                                         0.000     0.000
+count[8].Q[0] (.latch) [clock-to-output]                         0.124     0.124
+$0\count[15:0][8].in[0] (.names)                                 0.000     0.124
+$0\count[15:0][8].out[0] (.names)                                0.261     0.385
+count[8].D[0] (.latch)                                           0.000     0.385
+data arrival time                                                          0.385
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[8].clk[0] (.latch)                                         0.000     0.000
+clock uncertainty                                                0.000     0.000
+cell hold time                                                   0.066     0.066
+data required time                                                         0.066
+--------------------------------------------------------------------------------
+data required time                                                        -0.066
+data arrival time                                                          0.385
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.319
+
+
+#Path 12
+Startpoint: count[4].Q[0] (.latch clocked by clock0)
+Endpoint  : count[4].D[0] (.latch clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[4].clk[0] (.latch)                                         0.000     0.000
+count[4].Q[0] (.latch) [clock-to-output]                         0.124     0.124
+$0\count[15:0][4].in[0] (.names)                                 0.000     0.124
+$0\count[15:0][4].out[0] (.names)                                0.261     0.385
+count[4].D[0] (.latch)                                           0.000     0.385
+data arrival time                                                          0.385
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[4].clk[0] (.latch)                                         0.000     0.000
+clock uncertainty                                                0.000     0.000
+cell hold time                                                   0.066     0.066
+data required time                                                         0.066
+--------------------------------------------------------------------------------
+data required time                                                        -0.066
+data arrival time                                                          0.385
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.319
+
+
+#Path 13
+Startpoint: count[5].Q[0] (.latch clocked by clock0)
+Endpoint  : count[5].D[0] (.latch clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[5].clk[0] (.latch)                                         0.000     0.000
+count[5].Q[0] (.latch) [clock-to-output]                         0.124     0.124
+$0\count[15:0][5].in[0] (.names)                                 0.000     0.124
+$0\count[15:0][5].out[0] (.names)                                0.261     0.385
+count[5].D[0] (.latch)                                           0.000     0.385
+data arrival time                                                          0.385
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[5].clk[0] (.latch)                                         0.000     0.000
+clock uncertainty                                                0.000     0.000
+cell hold time                                                   0.066     0.066
+data required time                                                         0.066
+--------------------------------------------------------------------------------
+data required time                                                        -0.066
+data arrival time                                                          0.385
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.319
+
+
+#Path 14
+Startpoint: count[3].Q[0] (.latch clocked by clock0)
+Endpoint  : count[3].D[0] (.latch clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[3].clk[0] (.latch)                                         0.000     0.000
+count[3].Q[0] (.latch) [clock-to-output]                         0.124     0.124
+$0\count[15:0][3].in[0] (.names)                                 0.000     0.124
+$0\count[15:0][3].out[0] (.names)                                0.261     0.385
+count[3].D[0] (.latch)                                           0.000     0.385
+data arrival time                                                          0.385
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[3].clk[0] (.latch)                                         0.000     0.000
+clock uncertainty                                                0.000     0.000
+cell hold time                                                   0.066     0.066
+data required time                                                         0.066
+--------------------------------------------------------------------------------
+data required time                                                        -0.066
+data arrival time                                                          0.385
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.319
+
+
+#Path 15
+Startpoint: count[2].Q[0] (.latch clocked by clock0)
+Endpoint  : count[2].D[0] (.latch clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[2].clk[0] (.latch)                                         0.000     0.000
+count[2].Q[0] (.latch) [clock-to-output]                         0.124     0.124
+$0\count[15:0][2].in[0] (.names)                                 0.000     0.124
+$0\count[15:0][2].out[0] (.names)                                0.261     0.385
+count[2].D[0] (.latch)                                           0.000     0.385
+data arrival time                                                          0.385
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[2].clk[0] (.latch)                                         0.000     0.000
+clock uncertainty                                                0.000     0.000
+cell hold time                                                   0.066     0.066
+data required time                                                         0.066
+--------------------------------------------------------------------------------
+data required time                                                        -0.066
+data arrival time                                                          0.385
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.319
+
+
+#Path 16
+Startpoint: count[1].Q[0] (.latch clocked by clock0)
+Endpoint  : count[1].D[0] (.latch clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[1].clk[0] (.latch)                                         0.000     0.000
+count[1].Q[0] (.latch) [clock-to-output]                         0.124     0.124
+$0\count[15:0][1].in[0] (.names)                                 0.000     0.124
+$0\count[15:0][1].out[0] (.names)                                0.261     0.385
+count[1].D[0] (.latch)                                           0.000     0.385
+data arrival time                                                          0.385
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[1].clk[0] (.latch)                                         0.000     0.000
+clock uncertainty                                                0.000     0.000
+cell hold time                                                   0.066     0.066
+data required time                                                         0.066
+--------------------------------------------------------------------------------
+data required time                                                        -0.066
+data arrival time                                                          0.385
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.319
+
+
+#Path 17
+Startpoint: count[10].Q[0] (.latch clocked by clock0)
+Endpoint  : out:count[10].outpad[0] (.output clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[10].clk[0] (.latch)                                        0.000     0.000
+count[10].Q[0] (.latch) [clock-to-output]                        0.124     0.124
+out:count[10].outpad[0] (.output)                                0.244     0.368
+data arrival time                                                          0.368
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock uncertainty                                                0.000     0.000
+output external delay                                            0.000     0.000
+data required time                                                         0.000
+--------------------------------------------------------------------------------
+data required time                                                        -0.000
+data arrival time                                                          0.368
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.368
+
+
+#Path 18
+Startpoint: count[8].Q[0] (.latch clocked by clock0)
+Endpoint  : out:count[8].outpad[0] (.output clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[8].clk[0] (.latch)                                         0.000     0.000
+count[8].Q[0] (.latch) [clock-to-output]                         0.124     0.124
+out:count[8].outpad[0] (.output)                                 0.262     0.386
+data arrival time                                                          0.386
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock uncertainty                                                0.000     0.000
+output external delay                                            0.000     0.000
+data required time                                                         0.000
+--------------------------------------------------------------------------------
+data required time                                                        -0.000
+data arrival time                                                          0.386
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.386
+
+
+#Path 19
+Startpoint: count[6].Q[0] (.latch clocked by clock0)
+Endpoint  : out:count[6].outpad[0] (.output clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[6].clk[0] (.latch)                                         0.000     0.000
+count[6].Q[0] (.latch) [clock-to-output]                         0.124     0.124
+out:count[6].outpad[0] (.output)                                 0.340     0.464
+data arrival time                                                          0.464
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock uncertainty                                                0.000     0.000
+output external delay                                            0.000     0.000
+data required time                                                         0.000
+--------------------------------------------------------------------------------
+data required time                                                        -0.000
+data arrival time                                                          0.464
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.464
+
+
+#Path 20
+Startpoint: count[13].Q[0] (.latch clocked by clock0)
+Endpoint  : out:count[13].outpad[0] (.output clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[13].clk[0] (.latch)                                        0.000     0.000
+count[13].Q[0] (.latch) [clock-to-output]                        0.124     0.124
+out:count[13].outpad[0] (.output)                                0.358     0.482
+data arrival time                                                          0.482
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock uncertainty                                                0.000     0.000
+output external delay                                            0.000     0.000
+data required time                                                         0.000
+--------------------------------------------------------------------------------
+data required time                                                        -0.000
+data arrival time                                                          0.482
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.482
+
+
+#Path 21
+Startpoint: count[12].Q[0] (.latch clocked by clock0)
+Endpoint  : out:count[12].outpad[0] (.output clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[12].clk[0] (.latch)                                        0.000     0.000
+count[12].Q[0] (.latch) [clock-to-output]                        0.124     0.124
+out:count[12].outpad[0] (.output)                                0.390     0.514
+data arrival time                                                          0.514
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock uncertainty                                                0.000     0.000
+output external delay                                            0.000     0.000
+data required time                                                         0.000
+--------------------------------------------------------------------------------
+data required time                                                        -0.000
+data arrival time                                                          0.514
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.514
+
+
+#Path 22
+Startpoint: count[4].Q[0] (.latch clocked by clock0)
+Endpoint  : out:count[4].outpad[0] (.output clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[4].clk[0] (.latch)                                         0.000     0.000
+count[4].Q[0] (.latch) [clock-to-output]                         0.124     0.124
+out:count[4].outpad[0] (.output)                                 0.434     0.558
+data arrival time                                                          0.558
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock uncertainty                                                0.000     0.000
+output external delay                                            0.000     0.000
+data required time                                                         0.000
+--------------------------------------------------------------------------------
+data required time                                                        -0.000
+data arrival time                                                          0.558
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.558
+
+
+#Path 23
+Startpoint: count[9].Q[0] (.latch clocked by clock0)
+Endpoint  : out:count[9].outpad[0] (.output clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[9].clk[0] (.latch)                                         0.000     0.000
+count[9].Q[0] (.latch) [clock-to-output]                         0.124     0.124
+out:count[9].outpad[0] (.output)                                 0.458     0.582
+data arrival time                                                          0.582
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock uncertainty                                                0.000     0.000
+output external delay                                            0.000     0.000
+data required time                                                         0.000
+--------------------------------------------------------------------------------
+data required time                                                        -0.000
+data arrival time                                                          0.582
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.582
+
+
+#Path 24
+Startpoint: count[1].Q[0] (.latch clocked by clock0)
+Endpoint  : out:count[1].outpad[0] (.output clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[1].clk[0] (.latch)                                         0.000     0.000
+count[1].Q[0] (.latch) [clock-to-output]                         0.124     0.124
+out:count[1].outpad[0] (.output)                                 0.513     0.637
+data arrival time                                                          0.637
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock uncertainty                                                0.000     0.000
+output external delay                                            0.000     0.000
+data required time                                                         0.000
+--------------------------------------------------------------------------------
+data required time                                                        -0.000
+data arrival time                                                          0.637
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.637
+
+
+#Path 25
+Startpoint: count[3].Q[0] (.latch clocked by clock0)
+Endpoint  : out:count[3].outpad[0] (.output clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[3].clk[0] (.latch)                                         0.000     0.000
+count[3].Q[0] (.latch) [clock-to-output]                         0.124     0.124
+out:count[3].outpad[0] (.output)                                 0.515     0.639
+data arrival time                                                          0.639
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock uncertainty                                                0.000     0.000
+output external delay                                            0.000     0.000
+data required time                                                         0.000
+--------------------------------------------------------------------------------
+data required time                                                        -0.000
+data arrival time                                                          0.639
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.639
+
+
+#Path 26
+Startpoint: count[5].Q[0] (.latch clocked by clock0)
+Endpoint  : out:count[5].outpad[0] (.output clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[5].clk[0] (.latch)                                         0.000     0.000
+count[5].Q[0] (.latch) [clock-to-output]                         0.124     0.124
+out:count[5].outpad[0] (.output)                                 0.550     0.674
+data arrival time                                                          0.674
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock uncertainty                                                0.000     0.000
+output external delay                                            0.000     0.000
+data required time                                                         0.000
+--------------------------------------------------------------------------------
+data required time                                                        -0.000
+data arrival time                                                          0.674
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.674
+
+
+#Path 27
+Startpoint: count[15].Q[0] (.latch clocked by clock0)
+Endpoint  : out:count[15].outpad[0] (.output clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[15].clk[0] (.latch)                                        0.000     0.000
+count[15].Q[0] (.latch) [clock-to-output]                        0.124     0.124
+out:count[15].outpad[0] (.output)                                0.582     0.706
+data arrival time                                                          0.706
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock uncertainty                                                0.000     0.000
+output external delay                                            0.000     0.000
+data required time                                                         0.000
+--------------------------------------------------------------------------------
+data required time                                                        -0.000
+data arrival time                                                          0.706
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.706
+
+
+#Path 28
+Startpoint: count[11].Q[0] (.latch clocked by clock0)
+Endpoint  : out:count[11].outpad[0] (.output clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[11].clk[0] (.latch)                                        0.000     0.000
+count[11].Q[0] (.latch) [clock-to-output]                        0.124     0.124
+out:count[11].outpad[0] (.output)                                0.669     0.793
+data arrival time                                                          0.793
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock uncertainty                                                0.000     0.000
+output external delay                                            0.000     0.000
+data required time                                                         0.000
+--------------------------------------------------------------------------------
+data required time                                                        -0.000
+data arrival time                                                          0.793
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.793
+
+
+#Path 29
+Startpoint: count[0].Q[0] (.latch clocked by clock0)
+Endpoint  : out:count[0].outpad[0] (.output clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[0].clk[0] (.latch)                                         0.000     0.000
+count[0].Q[0] (.latch) [clock-to-output]                         0.124     0.124
+out:count[0].outpad[0] (.output)                                 0.738     0.862
+data arrival time                                                          0.862
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock uncertainty                                                0.000     0.000
+output external delay                                            0.000     0.000
+data required time                                                         0.000
+--------------------------------------------------------------------------------
+data required time                                                        -0.000
+data arrival time                                                          0.862
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.862
+
+
+#Path 30
+Startpoint: count[2].Q[0] (.latch clocked by clock0)
+Endpoint  : out:count[2].outpad[0] (.output clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[2].clk[0] (.latch)                                         0.000     0.000
+count[2].Q[0] (.latch) [clock-to-output]                         0.124     0.124
+out:count[2].outpad[0] (.output)                                 0.743     0.867
+data arrival time                                                          0.867
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock uncertainty                                                0.000     0.000
+output external delay                                            0.000     0.000
+data required time                                                         0.000
+--------------------------------------------------------------------------------
+data required time                                                        -0.000
+data arrival time                                                          0.867
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.867
+
+
+#Path 31
+Startpoint: count[14].Q[0] (.latch clocked by clock0)
+Endpoint  : out:count[14].outpad[0] (.output clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[14].clk[0] (.latch)                                        0.000     0.000
+count[14].Q[0] (.latch) [clock-to-output]                        0.124     0.124
+out:count[14].outpad[0] (.output)                                0.869     0.993
+data arrival time                                                          0.993
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock uncertainty                                                0.000     0.000
+output external delay                                            0.000     0.000
+data required time                                                         0.000
+--------------------------------------------------------------------------------
+data required time                                                        -0.000
+data arrival time                                                          0.993
+--------------------------------------------------------------------------------
+slack (MET)                                                                0.993
+
+
+#Path 32
+Startpoint: count[7].Q[0] (.latch clocked by clock0)
+Endpoint  : out:count[7].outpad[0] (.output clocked by clock0)
+Path Type : hold
+
+Point                                                             Incr      Path
+--------------------------------------------------------------------------------
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock0.inpad[0] (.input)                                         0.000     0.000
+count[7].clk[0] (.latch)                                         0.000     0.000
+count[7].Q[0] (.latch) [clock-to-output]                         0.124     0.124
+out:count[7].outpad[0] (.output)                                 0.948     1.072
+data arrival time                                                          1.072
+
+clock clock0 (rise edge)                                         0.000     0.000
+clock source latency                                             0.000     0.000
+clock uncertainty                                                0.000     0.000
+output external delay                                            0.000     0.000
+data required time                                                         0.000
+--------------------------------------------------------------------------------
+data required time                                                        -0.000
+data arrival time                                                          1.072
+--------------------------------------------------------------------------------
+slack (MET)                                                                1.072
+
+
+#End of timing report

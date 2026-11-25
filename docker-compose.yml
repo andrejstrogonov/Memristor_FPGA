@@ -1,0 +1,16 @@
+services:
+  openfpga:
+    image: ghcr.io/lnis-uofu/openfpga-master:latest
+    working_dir: /opt/openfpga
+    environment:
+      - LD_LIBRARY_PATH=/opt/openfpga/build/yosys:/opt/openfpga/build/openfpga
+    volumes:
+      - type: bind
+        source: .
+        target: /opt/openfpga/openfpga_flow/tasks/memristor_fir
+      - type: bind
+        source: ./rram_1t1r.v
+        target: /opt/openfpga/openfpga_flow/openfpga_cell_library/verilog/rram_1t1r.v
+      - type: bind
+        source: ./rram_ccff.v
+        target: /opt/openfpga/openfpga_flow/openfpga_cell_library/verilog/rram_ccff.v

@@ -1,0 +1,2 @@
+name,TotalRunTime,average_net_length,clb_blocks,critical_path,io_blocks,packing_time,placement_time,routing_time,total_logic_block_area,total_routing_area,total_routing_time,total_wire_length
+00_counterup16_1clk_posedge_sync_resetp_DEFAULT,2,9.28571,7,3.5184500000000004e-09,18,0.02,0.34,0.23,377258,17720.1,0.23,195

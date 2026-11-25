@@ -1,0 +1,4 @@
+# Rewrite the .blif to Verilog
+# so that the pin sequence matches
+read_blif rewritten_counterup16_1clk_posedge_sync_resetp_yosys_out.blif
+write_verilog counterup16_1clk_posedge_sync_resetp_output_verilog.v

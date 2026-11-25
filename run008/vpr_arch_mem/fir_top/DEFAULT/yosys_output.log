@@ -1,0 +1,785 @@
+/opt/openfpga/build/yosys/yosys yosys.ys
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.68+153 (git sha1 e0bf46ebc, release, GNU /usr/lib/ccache/g++-12 12.3.0)
+
+-- Executing script file `yosys.ys' --
+
+1. Executing Verilog-2005 frontend: ./benchmark/fir.v
+Parsing Verilog input from `./benchmark/fir.v' to AST representation.
+Generating RTLIL representation for module `\fir_filter'.
+Warning: Replacing memory \delay_line with list of registers. See ./benchmark/fir.v:37
+Generating RTLIL representation for module `\rram_coeff_storage'.
+Generating RTLIL representation for module `\fir_top'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \fir_top
+Used module:     \fir_filter
+Used module:         \rram_coeff_storage
+Parameter \TAPS = 8
+Parameter \WIDTH = 16
+
+2.2. Executing AST frontend in derive mode using pre-parsed AST for module `\rram_coeff_storage'.
+Parameter \TAPS = 8
+Parameter \WIDTH = 16
+Generating RTLIL representation for module `$paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage'.
+Reprocessing module fir_filter because instantiated module rram_coeff_storage has become available.
+Generating RTLIL representation for module `\fir_filter'.
+Warning: Replacing memory \delay_line with list of registers. See ./benchmark/fir.v:37
+Parameter \TAPS = 8
+Parameter \DATA_WIDTH = 16
+Parameter \COEFF_WIDTH = 16
+
+2.3. Executing AST frontend in derive mode using pre-parsed AST for module `\fir_filter'.
+Parameter \TAPS = 8
+Parameter \DATA_WIDTH = 16
+Parameter \COEFF_WIDTH = 16
+Generating RTLIL representation for module `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter'.
+Warning: Replacing memory \delay_line with list of registers. See ./benchmark/fir.v:37
+
+2.4. Analyzing design hierarchy..
+Top module:  \fir_top
+Used module:     $paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter
+Used module:         \rram_coeff_storage
+Parameter \TAPS = 8
+Parameter \WIDTH = 16
+Found cached RTLIL representation for module `$paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage'.
+
+2.5. Analyzing design hierarchy..
+Top module:  \fir_top
+Used module:     $paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter
+Used module:         $paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage
+
+2.6. Analyzing design hierarchy..
+Top module:  \fir_top
+Used module:     $paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter
+Used module:         $paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage
+Removing unused module `\fir_filter'.
+Removing unused module `\rram_coeff_storage'.
+Removed 2 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$./benchmark/fir.v:59$101 in module $paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.
+Marked 2 switch rules as full_case in process $proc$./benchmark/fir.v:34$90 in module $paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 35 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+Found init rule in `$paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage.$proc$./benchmark/fir.v:98$36'.
+  Set init value: \coeff_out_0 = 16'0000000000010111
+  Set init value: \coeff_out_1 = 16'0000000000101101
+  Set init value: \coeff_out_2 = 16'1111111111110100
+  Set init value: \coeff_out_3 = 16'1111111110111101
+  Set init value: \coeff_out_4 = 16'1111111110111101
+  Set init value: \coeff_out_5 = 16'1111111111110100
+  Set init value: \coeff_out_6 = 16'0000000000101101
+  Set init value: \coeff_out_7 = 16'0000000000010111
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_n in `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:59$101'.
+Found async reset \rst_n in `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:34$90'.
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~2 debug messages>
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:49$125'.
+Creating decoders for process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:49$123'.
+Creating decoders for process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:49$121'.
+Creating decoders for process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:49$119'.
+Creating decoders for process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:49$117'.
+Creating decoders for process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:49$115'.
+Creating decoders for process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:49$113'.
+Creating decoders for process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:49$111'.
+Creating decoders for process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:30$110'.
+Creating decoders for process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:29$109'.
+Creating decoders for process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:28$108'.
+Creating decoders for process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:27$107'.
+Creating decoders for process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:26$106'.
+Creating decoders for process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:25$105'.
+Creating decoders for process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:24$104'.
+Creating decoders for process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:23$103'.
+Creating decoders for process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:59$101'.
+     1/1: $1\dout[15:0]
+Creating decoders for process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:53$92'.
+Creating decoders for process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:34$90'.
+     1/11: $2\i[31:0]
+     2/11: $1\i[31:0]
+     3/11: $0\delay_line[7][15:0]
+     4/11: $0\delay_line[6][15:0]
+     5/11: $0\delay_line[5][15:0]
+     6/11: $0\delay_line[4][15:0]
+     7/11: $0\delay_line[3][15:0]
+     8/11: $0\delay_line[2][15:0]
+     9/11: $0\delay_line[1][15:0]
+    10/11: $0\delay_line[0][15:0]
+    11/11: $0\dout[15:0]
+Creating decoders for process `$paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage.$proc$./benchmark/fir.v:98$36'.
+Creating decoders for process `$paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage.$proc$./benchmark/fir.v:109$35'.
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\mult[7]' from process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:49$125'.
+No latch inferred for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\mult[6]' from process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:49$123'.
+No latch inferred for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\mult[5]' from process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:49$121'.
+No latch inferred for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\mult[4]' from process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:49$119'.
+No latch inferred for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\mult[3]' from process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:49$117'.
+No latch inferred for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\mult[2]' from process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:49$115'.
+No latch inferred for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\mult[1]' from process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:49$113'.
+No latch inferred for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\mult[0]' from process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:49$111'.
+No latch inferred for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\coeff[7]' from process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:30$110'.
+No latch inferred for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\coeff[6]' from process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:29$109'.
+No latch inferred for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\coeff[5]' from process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:28$108'.
+No latch inferred for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\coeff[4]' from process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:27$107'.
+No latch inferred for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\coeff[3]' from process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:26$106'.
+No latch inferred for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\coeff[2]' from process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:25$105'.
+No latch inferred for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\coeff[1]' from process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:24$104'.
+No latch inferred for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\coeff[0]' from process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:23$103'.
+No latch inferred for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\i' from process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:53$92'.
+No latch inferred for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\sum' from process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:53$92'.
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\dout' using process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:59$101'.
+  created $adff cell `$procdff$160' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\i' using process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:34$90'.
+  created $dff cell `$procdff$167' with positive edge clock.
+Creating register for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\dout' using process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:34$90'.
+  created $adff cell `$procdff$172' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\delay_line[0]' using process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:34$90'.
+  created $adff cell `$procdff$177' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\delay_line[1]' using process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:34$90'.
+  created $adff cell `$procdff$182' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\delay_line[2]' using process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:34$90'.
+  created $adff cell `$procdff$187' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\delay_line[3]' using process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:34$90'.
+  created $adff cell `$procdff$192' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\delay_line[4]' using process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:34$90'.
+  created $adff cell `$procdff$197' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\delay_line[5]' using process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:34$90'.
+  created $adff cell `$procdff$202' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\delay_line[6]' using process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:34$90'.
+  created $adff cell `$procdff$207' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.\delay_line[7]' using process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:34$90'.
+  created $adff cell `$procdff$212' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage.\coeff_out_0' using process `$paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage.$proc$./benchmark/fir.v:109$35'.
+  created $dff cell `$procdff$213' with positive edge clock.
+Creating register for signal `$paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage.\coeff_out_1' using process `$paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage.$proc$./benchmark/fir.v:109$35'.
+  created $dff cell `$procdff$214' with positive edge clock.
+Creating register for signal `$paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage.\coeff_out_2' using process `$paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage.$proc$./benchmark/fir.v:109$35'.
+  created $dff cell `$procdff$215' with positive edge clock.
+Creating register for signal `$paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage.\coeff_out_3' using process `$paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage.$proc$./benchmark/fir.v:109$35'.
+  created $dff cell `$procdff$216' with positive edge clock.
+Creating register for signal `$paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage.\coeff_out_4' using process `$paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage.$proc$./benchmark/fir.v:109$35'.
+  created $dff cell `$procdff$217' with positive edge clock.
+Creating register for signal `$paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage.\coeff_out_5' using process `$paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage.$proc$./benchmark/fir.v:109$35'.
+  created $dff cell `$procdff$218' with positive edge clock.
+Creating register for signal `$paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage.\coeff_out_6' using process `$paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage.$proc$./benchmark/fir.v:109$35'.
+  created $dff cell `$procdff$219' with positive edge clock.
+Creating register for signal `$paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage.\coeff_out_7' using process `$paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage.$proc$./benchmark/fir.v:109$35'.
+  created $dff cell `$procdff$220' with positive edge clock.
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:49$125'.
+Removing empty process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:49$123'.
+Removing empty process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:49$121'.
+Removing empty process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:49$119'.
+Removing empty process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:49$117'.
+Removing empty process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:49$115'.
+Removing empty process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:49$113'.
+Removing empty process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:49$111'.
+Removing empty process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:30$110'.
+Removing empty process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:29$109'.
+Removing empty process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:28$108'.
+Removing empty process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:27$107'.
+Removing empty process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:26$106'.
+Removing empty process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:25$105'.
+Removing empty process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:24$104'.
+Removing empty process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:23$103'.
+Found and cleaned up 1 empty switch in `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:59$101'.
+Removing empty process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:59$101'.
+Removing empty process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:53$92'.
+Found and cleaned up 1 empty switch in `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:34$90'.
+Removing empty process `$paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.$proc$./benchmark/fir.v:34$90'.
+Removing empty process `$paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage.$proc$./benchmark/fir.v:98$36'.
+Removing empty process `$paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage.$proc$./benchmark/fir.v:109$35'.
+Cleaned up 2 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_top.
+Optimizing module $paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.
+<suppressed ~24 debug messages>
+Optimizing module $paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage.
+
+4. Executing TECHMAP pass (map to technology primitives).
+
+4.1. Executing Verilog-2005 frontend: /opt/openfpga/build/yosys/share/adff2dff.v
+Parsing Verilog input from `/opt/openfpga/build/yosys/share/adff2dff.v' to AST representation.
+Generating RTLIL representation for module `\adff2dff'.
+Successfully finished Verilog frontend.
+
+4.2. Continuing TECHMAP pass.
+Using template $paramod$4480bb505036c7f4c9124e1d27e2b5baf566f7c2\adff2dff for cells of type $adff.
+No more expansions possible.
+<suppressed ~104 debug messages>
+
+5. Executing FLATTEN pass (flatten design).
+Deleting now unused module $paramod$7cfcbf5421f37f96aad1592f24089c56ab150e5c\fir_filter.
+Deleting now unused module $paramod$90a92a9b0dddb2a1fe86336d442d7364b57edbfc\rram_coeff_storage.
+<suppressed ~2 debug messages>
+
+6. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_top.
+<suppressed ~1 debug messages>
+
+7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_top..
+Removed 14 unused cells and 151 unused wires.
+<suppressed ~16 debug messages>
+
+8. Executing CHECK pass (checking for obvious problems).
+Checking module fir_top...
+Warning: multiple conflicting drivers for fir_top.\u_fir.dout [15]:
+    port Q[15] of cell $flatten\u_fir.$techmap$procdff$160.$procdff$230 ($dff)
+    port Q[15] of cell $flatten\u_fir.$techmap$procdff$172.$procdff$230 ($dff)
+Warning: multiple conflicting drivers for fir_top.\u_fir.dout [14]:
+    port Q[14] of cell $flatten\u_fir.$techmap$procdff$160.$procdff$230 ($dff)
+    port Q[14] of cell $flatten\u_fir.$techmap$procdff$172.$procdff$230 ($dff)
+Warning: multiple conflicting drivers for fir_top.\u_fir.dout [13]:
+    port Q[13] of cell $flatten\u_fir.$techmap$procdff$160.$procdff$230 ($dff)
+    port Q[13] of cell $flatten\u_fir.$techmap$procdff$172.$procdff$230 ($dff)
+Warning: multiple conflicting drivers for fir_top.\u_fir.dout [12]:
+    port Q[12] of cell $flatten\u_fir.$techmap$procdff$160.$procdff$230 ($dff)
+    port Q[12] of cell $flatten\u_fir.$techmap$procdff$172.$procdff$230 ($dff)
+Warning: multiple conflicting drivers for fir_top.\u_fir.dout [11]:
+    port Q[11] of cell $flatten\u_fir.$techmap$procdff$160.$procdff$230 ($dff)
+    port Q[11] of cell $flatten\u_fir.$techmap$procdff$172.$procdff$230 ($dff)
+Warning: multiple conflicting drivers for fir_top.\u_fir.dout [10]:
+    port Q[10] of cell $flatten\u_fir.$techmap$procdff$160.$procdff$230 ($dff)
+    port Q[10] of cell $flatten\u_fir.$techmap$procdff$172.$procdff$230 ($dff)
+Warning: multiple conflicting drivers for fir_top.\u_fir.dout [9]:
+    port Q[9] of cell $flatten\u_fir.$techmap$procdff$160.$procdff$230 ($dff)
+    port Q[9] of cell $flatten\u_fir.$techmap$procdff$172.$procdff$230 ($dff)
+Warning: multiple conflicting drivers for fir_top.\u_fir.dout [8]:
+    port Q[8] of cell $flatten\u_fir.$techmap$procdff$160.$procdff$230 ($dff)
+    port Q[8] of cell $flatten\u_fir.$techmap$procdff$172.$procdff$230 ($dff)
+Warning: multiple conflicting drivers for fir_top.\u_fir.dout [7]:
+    port Q[7] of cell $flatten\u_fir.$techmap$procdff$160.$procdff$230 ($dff)
+    port Q[7] of cell $flatten\u_fir.$techmap$procdff$172.$procdff$230 ($dff)
+Warning: multiple conflicting drivers for fir_top.\u_fir.dout [6]:
+    port Q[6] of cell $flatten\u_fir.$techmap$procdff$160.$procdff$230 ($dff)
+    port Q[6] of cell $flatten\u_fir.$techmap$procdff$172.$procdff$230 ($dff)
+Warning: multiple conflicting drivers for fir_top.\u_fir.dout [5]:
+    port Q[5] of cell $flatten\u_fir.$techmap$procdff$160.$procdff$230 ($dff)
+    port Q[5] of cell $flatten\u_fir.$techmap$procdff$172.$procdff$230 ($dff)
+Warning: multiple conflicting drivers for fir_top.\u_fir.dout [4]:
+    port Q[4] of cell $flatten\u_fir.$techmap$procdff$160.$procdff$230 ($dff)
+    port Q[4] of cell $flatten\u_fir.$techmap$procdff$172.$procdff$230 ($dff)
+Warning: multiple conflicting drivers for fir_top.\u_fir.dout [3]:
+    port Q[3] of cell $flatten\u_fir.$techmap$procdff$160.$procdff$230 ($dff)
+    port Q[3] of cell $flatten\u_fir.$techmap$procdff$172.$procdff$230 ($dff)
+Warning: multiple conflicting drivers for fir_top.\u_fir.dout [2]:
+    port Q[2] of cell $flatten\u_fir.$techmap$procdff$160.$procdff$230 ($dff)
+    port Q[2] of cell $flatten\u_fir.$techmap$procdff$172.$procdff$230 ($dff)
+Warning: multiple conflicting drivers for fir_top.\u_fir.dout [1]:
+    port Q[1] of cell $flatten\u_fir.$techmap$procdff$160.$procdff$230 ($dff)
+    port Q[1] of cell $flatten\u_fir.$techmap$procdff$172.$procdff$230 ($dff)
+Warning: multiple conflicting drivers for fir_top.\u_fir.dout [0]:
+    port Q[0] of cell $flatten\u_fir.$techmap$procdff$160.$procdff$230 ($dff)
+    port Q[0] of cell $flatten\u_fir.$techmap$procdff$172.$procdff$230 ($dff)
+Found and reported 16 problems.
+
+9. Executing OPT pass (performing simple optimizations).
+
+9.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_top.
+
+9.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_top'.
+Computing hashes of 62 cells of `\fir_top'.
+Finding duplicate cells in `\fir_top'.
+Removed a total of 0 cells.
+
+9.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fir_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~29 debug messages>
+
+9.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fir_top.
+Performed a total of 0 changes.
+
+9.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_top'.
+Computing hashes of 62 cells of `\fir_top'.
+Finding duplicate cells in `\fir_top'.
+Removed a total of 0 cells.
+
+9.6. Executing OPT_DFF pass (perform DFF optimizations).
+Handling D = Q on $flatten\u_fir.\coeff_mem.$procdff$213 ($dff) from module fir_top (removing D path).
+Handling D = Q on $flatten\u_fir.\coeff_mem.$procdff$214 ($dff) from module fir_top (removing D path).
+Handling D = Q on $flatten\u_fir.\coeff_mem.$procdff$215 ($dff) from module fir_top (removing D path).
+Handling D = Q on $flatten\u_fir.\coeff_mem.$procdff$216 ($dff) from module fir_top (removing D path).
+Handling D = Q on $flatten\u_fir.\coeff_mem.$procdff$217 ($dff) from module fir_top (removing D path).
+Handling D = Q on $flatten\u_fir.\coeff_mem.$procdff$218 ($dff) from module fir_top (removing D path).
+Handling D = Q on $flatten\u_fir.\coeff_mem.$procdff$219 ($dff) from module fir_top (removing D path).
+Handling D = Q on $flatten\u_fir.\coeff_mem.$procdff$220 ($dff) from module fir_top (removing D path).
+
+9.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_top..
+
+9.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_top.
+<suppressed ~2 debug messages>
+
+9.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+9.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fir_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~29 debug messages>
+
+9.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fir_top.
+Performed a total of 0 changes.
+
+9.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_top'.
+Computing hashes of 54 cells of `\fir_top'.
+Finding duplicate cells in `\fir_top'.
+Removed a total of 0 cells.
+
+9.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+9.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_top..
+
+9.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_top.
+
+9.16. Finished fast OPT passes. (There is nothing left to do.)
+
+10. Executing FSM pass (extract and optimize FSM).
+
+10.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+10.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+10.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+10.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_top..
+
+10.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+10.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+10.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+10.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+11. Executing OPT pass (performing simple optimizations).
+
+11.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_top.
+
+11.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_top'.
+Computing hashes of 54 cells of `\fir_top'.
+Finding duplicate cells in `\fir_top'.
+Removed a total of 0 cells.
+
+11.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fir_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~29 debug messages>
+
+11.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fir_top.
+Performed a total of 0 changes.
+
+11.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_top'.
+Computing hashes of 54 cells of `\fir_top'.
+Finding duplicate cells in `\fir_top'.
+Removed a total of 0 cells.
+
+11.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+11.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_top..
+
+11.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_top.
+
+11.9. Finished fast OPT passes. (There is nothing left to do.)
+
+12. Executing WREDUCE pass (reducing word size of cells).
+Removed top 10 bits (of 16) from port B of cell fir_top.$flatten\u_fir.$mul$./benchmark/fir.v:49$126 ($mul).
+Removed top 10 bits (of 32) from port Y of cell fir_top.$flatten\u_fir.$mul$./benchmark/fir.v:49$126 ($mul).
+Removed top 9 bits (of 16) from port B of cell fir_top.$flatten\u_fir.$mul$./benchmark/fir.v:49$124 ($mul).
+Removed top 9 bits (of 32) from port Y of cell fir_top.$flatten\u_fir.$mul$./benchmark/fir.v:49$124 ($mul).
+Removed top 11 bits (of 14) from port B of cell fir_top.$flatten\u_fir.$mul$./benchmark/fir.v:49$122 ($mul).
+Removed top 11 bits (of 30) from port Y of cell fir_top.$flatten\u_fir.$mul$./benchmark/fir.v:49$122 ($mul).
+Removed top 8 bits (of 16) from port B of cell fir_top.$flatten\u_fir.$mul$./benchmark/fir.v:49$120 ($mul).
+Removed top 8 bits (of 32) from port Y of cell fir_top.$flatten\u_fir.$mul$./benchmark/fir.v:49$120 ($mul).
+Removed top 8 bits (of 16) from port B of cell fir_top.$flatten\u_fir.$mul$./benchmark/fir.v:49$118 ($mul).
+Removed top 8 bits (of 32) from port Y of cell fir_top.$flatten\u_fir.$mul$./benchmark/fir.v:49$118 ($mul).
+Removed top 11 bits (of 14) from port B of cell fir_top.$flatten\u_fir.$mul$./benchmark/fir.v:49$116 ($mul).
+Removed top 11 bits (of 30) from port Y of cell fir_top.$flatten\u_fir.$mul$./benchmark/fir.v:49$116 ($mul).
+Removed top 9 bits (of 16) from port B of cell fir_top.$flatten\u_fir.$mul$./benchmark/fir.v:49$114 ($mul).
+Removed top 9 bits (of 32) from port Y of cell fir_top.$flatten\u_fir.$mul$./benchmark/fir.v:49$114 ($mul).
+Removed top 10 bits (of 16) from port B of cell fir_top.$flatten\u_fir.$mul$./benchmark/fir.v:49$112 ($mul).
+Removed top 10 bits (of 32) from port Y of cell fir_top.$flatten\u_fir.$mul$./benchmark/fir.v:49$112 ($mul).
+Removed top 10 bits (of 32) from port B of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$100 ($add).
+Removed top 17 bits (of 33) from port Y of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$100 ($add).
+Removed top 17 bits (of 33) from port A of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$100 ($add).
+Removed top 6 bits (of 22) from port B of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$100 ($add).
+Removed top 9 bits (of 32) from port B of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$99 ($add).
+Removed top 17 bits (of 33) from port Y of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$99 ($add).
+Removed top 17 bits (of 33) from port A of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$99 ($add).
+Removed top 7 bits (of 23) from port B of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$99 ($add).
+Removed top 11 bits (of 32) from port B of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$98 ($add).
+Removed top 17 bits (of 33) from port Y of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$98 ($add).
+Removed top 17 bits (of 33) from port A of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$98 ($add).
+Removed top 5 bits (of 21) from port B of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$98 ($add).
+Removed top 8 bits (of 32) from port B of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$97 ($add).
+Removed top 17 bits (of 33) from port Y of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$97 ($add).
+Removed top 17 bits (of 33) from port A of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$97 ($add).
+Removed top 8 bits (of 24) from port B of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$97 ($add).
+Removed top 8 bits (of 32) from port B of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$96 ($add).
+Removed top 17 bits (of 33) from port Y of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$96 ($add).
+Removed top 17 bits (of 33) from port A of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$96 ($add).
+Removed top 8 bits (of 24) from port B of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$96 ($add).
+Removed top 11 bits (of 32) from port B of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$95 ($add).
+Removed top 17 bits (of 33) from port Y of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$95 ($add).
+Removed top 17 bits (of 33) from port A of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$95 ($add).
+Removed top 5 bits (of 21) from port B of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$95 ($add).
+Removed top 11 bits (of 33) from port A of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$94 ($add).
+Removed top 9 bits (of 32) from port B of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$94 ($add).
+Removed top 17 bits (of 33) from port Y of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$94 ($add).
+Removed top 6 bits (of 22) from port A of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$94 ($add).
+Removed top 7 bits (of 23) from port B of cell fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$94 ($add).
+Removed top 6 bits (of 22) from port Y of cell fir_top.$flatten\u_fir.$mul$./benchmark/fir.v:49$126 ($mul).
+Removed top 7 bits (of 23) from port Y of cell fir_top.$flatten\u_fir.$mul$./benchmark/fir.v:49$124 ($mul).
+Removed top 5 bits (of 19) from port Y of cell fir_top.$flatten\u_fir.$mul$./benchmark/fir.v:49$122 ($mul).
+Removed top 8 bits (of 24) from port Y of cell fir_top.$flatten\u_fir.$mul$./benchmark/fir.v:49$120 ($mul).
+Removed top 8 bits (of 24) from port Y of cell fir_top.$flatten\u_fir.$mul$./benchmark/fir.v:49$118 ($mul).
+Removed top 5 bits (of 19) from port Y of cell fir_top.$flatten\u_fir.$mul$./benchmark/fir.v:49$116 ($mul).
+Removed top 7 bits (of 23) from port Y of cell fir_top.$flatten\u_fir.$mul$./benchmark/fir.v:49$114 ($mul).
+Removed top 6 bits (of 22) from port Y of cell fir_top.$flatten\u_fir.$mul$./benchmark/fir.v:49$112 ($mul).
+Removed top 17 bits (of 33) from wire fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$96_Y.
+Removed top 17 bits (of 33) from wire fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$95_Y.
+Removed top 17 bits (of 33) from wire fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$94_Y.
+Removed top 17 bits (of 33) from wire fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$99_Y.
+Removed top 17 bits (of 33) from wire fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$98_Y.
+Removed top 17 bits (of 33) from wire fir_top.$flatten\u_fir.$add$./benchmark/fir.v:56$97_Y.
+
+13. Executing PEEPOPT pass (run peephole optimizers).
+
+14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_top..
+Removed 0 unused cells and 6 unused wires.
+<suppressed ~1 debug messages>
+
+15. Executing OPT pass (performing simple optimizations).
+
+15.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_top.
+
+15.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_top'.
+Computing hashes of 54 cells of `\fir_top'.
+Finding duplicate cells in `\fir_top'.
+Removed a total of 0 cells.
+
+15.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fir_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~29 debug messages>
+
+15.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fir_top.
+Performed a total of 0 changes.
+
+15.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_top'.
+Computing hashes of 54 cells of `\fir_top'.
+Finding duplicate cells in `\fir_top'.
+Removed a total of 0 cells.
+
+15.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+15.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_top..
+
+15.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_top.
+
+15.9. Finished fast OPT passes. (There is nothing left to do.)
+
+16. Executing MEMORY pass.
+
+16.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+16.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+16.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+16.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+16.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+16.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_top..
+
+16.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+16.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+16.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_top..
+
+16.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+17. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_top..
+
+18. Executing OPT pass (performing simple optimizations).
+
+18.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_top.
+<suppressed ~24 debug messages>
+
+18.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_top'.
+Computing hashes of 54 cells of `\fir_top'.
+Finding duplicate cells in `\fir_top'.
+Removed a total of 0 cells.
+
+18.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+18.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_top..
+
+18.5. Finished fast OPT passes.
+
+19. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+20. Executing OPT pass (performing simple optimizations).
+
+20.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_top.
+
+20.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_top'.
+Computing hashes of 54 cells of `\fir_top'.
+Finding duplicate cells in `\fir_top'.
+Removed a total of 0 cells.
+
+20.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fir_top..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~29 debug messages>
+
+20.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fir_top.
+Performed a total of 0 changes.
+
+20.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_top'.
+Computing hashes of 54 cells of `\fir_top'.
+Finding duplicate cells in `\fir_top'.
+Removed a total of 0 cells.
+
+20.6. Executing OPT_SHARE pass.
+
+20.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+20.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_top..
+
+20.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_top.
+
+20.10. Finished fast OPT passes. (There is nothing left to do.)
+
+21. Executing TECHMAP pass (map to technology primitives).
+
+21.1. Executing Verilog-2005 frontend: /opt/openfpga/build/yosys/share/techmap.v
+Parsing Verilog input from `/opt/openfpga/build/yosys/share/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+21.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $dff.
+Running "alumacc" on wrapper $extern:wrap:$mul:Y_WIDTH=16:B_WIDTH=6:A_WIDTH=16:B_SIGNED=1:A_SIGNED=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$mul:Y_WIDTH=16:B_WIDTH=6:A_WIDTH=16:B_SIGNED=1:A_SIGNED=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$mul:Y_WIDTH=16:B_WIDTH=6:A_WIDTH=16:B_SIGNED=1:A_SIGNED=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$mul:Y_WIDTH=16:B_WIDTH=7:A_WIDTH=16:B_SIGNED=1:A_SIGNED=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$mul:Y_WIDTH=16:B_WIDTH=7:A_WIDTH=16:B_SIGNED=1:A_SIGNED=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$mul:Y_WIDTH=16:B_WIDTH=7:A_WIDTH=16:B_SIGNED=1:A_SIGNED=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$mul:Y_WIDTH=14:B_WIDTH=3:A_WIDTH=16:B_SIGNED=1:A_SIGNED=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$mul:Y_WIDTH=14:B_WIDTH=3:A_WIDTH=16:B_SIGNED=1:A_SIGNED=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$mul:Y_WIDTH=14:B_WIDTH=3:A_WIDTH=16:B_SIGNED=1:A_SIGNED=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$mul:Y_WIDTH=16:B_WIDTH=8:A_WIDTH=16:B_SIGNED=1:A_SIGNED=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$mul:Y_WIDTH=16:B_WIDTH=8:A_WIDTH=16:B_SIGNED=1:A_SIGNED=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$mul:Y_WIDTH=16:B_WIDTH=8:A_WIDTH=16:B_SIGNED=1:A_SIGNED=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$add:Y_WIDTH=16:B_WIDTH=16:A_WIDTH=16:B_SIGNED=1:A_SIGNED=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:Y_WIDTH=16:B_WIDTH=16:A_WIDTH=16:B_SIGNED=1:A_SIGNED=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:Y_WIDTH=16:B_WIDTH=16:A_WIDTH=16:B_SIGNED=1:A_SIGNED=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$add:Y_WIDTH=14:B_WIDTH=14:A_WIDTH=14:B_SIGNED=1:A_SIGNED=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:Y_WIDTH=14:B_WIDTH=14:A_WIDTH=14:B_SIGNED=1:A_SIGNED=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:Y_WIDTH=14:B_WIDTH=14:A_WIDTH=14:B_SIGNED=1:A_SIGNED=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $paramod$d4c0c20b0ee59f495e14575c4397dc0a6dd9e8e6\_90_alu for cells of type $alu.
+Using template $paramod$0d7ff93aea395ec407d544a178a4b13ea860d212\_90_alu for cells of type $alu.
+Using extmapper maccmap for cells of type $macc_v2.
+  add \u_fir.delay_line[0] * 6'010111 (16x6 bits, signed)
+  add \u_fir.delay_line[1] * 7'0101101 (16x7 bits, signed)
+  add \u_fir.delay_line[2] * 3'101 (16x3 bits, signed)
+  add \u_fir.delay_line[3] * 8'10111101 (16x8 bits, signed)
+  add \u_fir.delay_line[4] * 8'10111101 (16x8 bits, signed)
+  add \u_fir.delay_line[5] * 3'101 (16x3 bits, signed)
+  add \u_fir.delay_line[6] * 7'0101101 (16x7 bits, signed)
+  add \u_fir.delay_line[7] * 6'010111 (16x6 bits, signed)
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000010000 for cells of type $fa.
+Using template $paramod$6df0329addda9228fcc2546de2aaf14ad26c98e1\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $not.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000001110 for cells of type $fa.
+Using template $paramod$091610cd349a68bd5539cffd7126f0d76e9bca00\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000010000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001110 for cells of type $lcu.
+Using extmapper simplemap for cells of type $or.
+No more expansions possible.
+<suppressed ~1939 debug messages>
+
+22. Executing OPT pass (performing simple optimizations).
+
+22.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fir_top.
+<suppressed ~3496 debug messages>
+
+22.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fir_top'.
+Computing hashes of 3456 cells of `\fir_top'.
+Finding duplicate cells in `\fir_top'.
+Computing hashes of 3431 cells of `\fir_top'.
+Finding duplicate cells in `\fir_top'.
+Computing hashes of 3427 cells of `\fir_top'.
+Finding duplicate cells in `\fir_top'.
+Computing hashes of 3425 cells of `\fir_top'.
+Finding duplicate cells in `\fir_top'.
+<suppressed ~93 debug messages>
+Removed a total of 31 cells.
+
+22.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+22.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fir_top..
+Removed 465 unused cells and 1300 unused wires.
+<suppressed ~466 debug messages>
+
+22.5. Finished fast OPT passes.
+
+23. Executing ABC pass (technology mapping using ABC).
+
+23.1. Extracting gate netlist of module `\fir_top' to `<abc-temp-dir>/input.blif'..
+
+23.1.1. Executed ABC.
+Extracted 2790 gates and 2953 wires to a netlist network with 162 inputs and 160 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: UC Berkeley, ABC 1.01 (compiled Nov 22 2026 04:12:42)
+ABC: abc 01> empty
+ABC: abc 01> source <abc-temp-dir>/abc.script
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lut <abc-temp-dir>/lutdefs.txt 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + dch -f 
+ABC: + if 
+ABC: + mfs2 
+ABC: + lutpack -S 1 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+ABC: 
+ABC: YOSYS_ABC_DONE 
+
+23.1.2. Re-integrating ABC results.
+ABC RESULTS:              $lut cells:     1048
+ABC RESULTS:        internal signals:     2631
+ABC RESULTS:           input signals:      162
+ABC RESULTS:          output signals:      160
+Removing temp directory.
+Removing global temp directory.
+
+24. Executing SYNTH pass.
+
+24.1. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `fir_top'. Setting top module to fir_top.
+
+24.1.1. Analyzing design hierarchy..
+Top module:  \fir_top
+ERROR: Module `\rram_1t1r' referenced in module `\fir_top' in cell `\u_fir.coeff_mem.RRAM_ARRAY[7].u_rram' is not part of the design.
+1

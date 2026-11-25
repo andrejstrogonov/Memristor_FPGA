@@ -1,0 +1,35 @@
+VPR FPGA Placement and Routing.
+Version: 9.0.0-dev+v8.0.0-18649-g0b912334fd
+Revision: v8.0.0-18649-g0b912334fd
+Compiled: 2026-11-22T04:09:46
+Compiler: GNU 12.3.0 on Linux-6.8.0-1070-azure x86_64
+Build Info: release IPO VTR_ASSERT_LEVEL=2
+
+University of Toronto
+verilogtorouting.org
+vtr-users@googlegroups.com
+This is free open source code under MIT license.
+
+VPR was run with the following command-line:
+vpr /opt/openfpga/openfpga_flow/tasks/memristor_fir/run015/vpr_arch_mem/fir_top/DEFAULT/arch/vpr_arch_mem.xml fir_top.blif --clock_modeling ideal
+
+
+Architecture file: /opt/openfpga/openfpga_flow/tasks/memristor_fir/run015/vpr_arch_mem/fir_top/DEFAULT/arch/vpr_arch_mem.xml
+Circuit name: fir_top
+
+# Loading Architecture Description
+Warning 1: Model 'io' input port 'outpad' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 2: Model 'io' output port 'inpad' has no timing specification (no clock specified to create a sequential output port, not combinationally connected to any inputs, not a clock output)
+# Loading Architecture Description took 0.01 seconds (max_rss 26.7 MiB, delta_rss +1.7 MiB)
+Error 1: /opt/openfpga/openfpga_flow/tasks/memristor_fir/run015/vpr_arch_mem/fir_top/DEFAULT/arch/vpr_arch_mem.xml:111 Inputs to LUT primitives must have a port class named as "lut_in".
+The entire flow of VPR took 0.01 seconds (max_rss 26.7 MiB)
+Fatal error occurred!
+OpenFPGA Abort
+
+Error 2: Command 'vpr' execution has fatal errors
+
+Finish execution with 2 errors
+
+The entire OpenFPGA flow took 0.002654 seconds
+
+Thank you for using OpenFPGA!

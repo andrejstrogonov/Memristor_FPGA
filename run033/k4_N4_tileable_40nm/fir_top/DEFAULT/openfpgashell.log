@@ -1,0 +1,186 @@
+/opt/openfpga/build/openfpga/openfpga -batch -f fir_top_run.openfpga
+Reading script file fir_top_run.openfpga...
+
+            ___                   _____ ____   ____    _     
+           / _ \ _ __   ___ _ __ |  ___|  _ \ / ___|  / \    
+          | | | | '_ \ / _ \ '_ \| |_  | |_) | |  _  / _ \   
+          | |_| | |_) |  __/ | | |  _| |  __/| |_| |/ ___ \  
+           \___/| .__/ \___|_| |_|_|   |_|    \____/_/   \_\ 
+                |_|                                          
+
+               OpenFPGA: An Open-source FPGA IP Generator
+                     Versatile Place and Route (VPR)
+                           FPGA-Verilog
+                           FPGA-SPICE
+                           FPGA-SDC
+                           FPGA-Bitstream
+
+             This is a free software under the MIT License
+
+             Copyright (c) 2018 LNIS - The University of Utah
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+
+
+Command line to execute: vpr /opt/openfpga/openfpga_flow/tasks/memristor_fir/run033/k4_N4_tileable_40nm/fir_top/DEFAULT/arch/k4_N4_tileable_40nm.xml fir_top.blif --clock_modeling ideal
+VPR FPGA Placement and Routing.
+Version: 9.0.0-dev+v8.0.0-18649-g0b912334fd
+Revision: v8.0.0-18649-g0b912334fd
+Compiled: 2026-11-22T04:09:46
+Compiler: GNU 12.3.0 on Linux-6.8.0-1070-azure x86_64
+Build Info: release IPO VTR_ASSERT_LEVEL=2
+
+University of Toronto
+verilogtorouting.org
+vtr-users@googlegroups.com
+This is free open source code under MIT license.
+
+VPR was run with the following command-line:
+vpr /opt/openfpga/openfpga_flow/tasks/memristor_fir/run033/k4_N4_tileable_40nm/fir_top/DEFAULT/arch/k4_N4_tileable_40nm.xml fir_top.blif --clock_modeling ideal
+
+
+Architecture file: /opt/openfpga/openfpga_flow/tasks/memristor_fir/run033/k4_N4_tileable_40nm/fir_top/DEFAULT/arch/k4_N4_tileable_40nm.xml
+Circuit name: fir_top
+
+# Loading Architecture Description
+Warning 1: Model 'io' input port 'outpad' has no timing specification (no clock specified to create a sequential input port, not combinationally connected to any outputs, not a clock input)
+Warning 2: Model 'io' output port 'inpad' has no timing specification (no clock specified to create a sequential output port, not combinationally connected to any inputs, not a clock output)
+mode 'io[physical]' is defined by user to be disabled in packing
+# Loading Architecture Description took 0.01 seconds (max_rss 27.1 MiB, delta_rss +2.1 MiB)
+
+Timing analysis: ON
+Circuit netlist file: fir_top.net
+Circuit placement file: fir_top.place
+Circuit routing file: fir_top.route
+Circuit SDC file: fir_top.sdc
+Vpr floorplanning constraints file: not specified
+
+Packer: DISABLED
+Placer: DISABLED
+Analytical Placer: ENABLED
+Router: ENABLED
+Analysis: SKIP IF PRIOR FAIL
+
+VPR was run with the following options:
+
+netlist_opts.absorb_buffer_luts            : true
+netlist_opts.merge_constant_generators     : true
+netlist_opts.sweep_dangling_primary_ios    : true
+netlist_opts.sweep_dangling_nets           : true
+netlist_opts.sweep_dangling_blocks         : true
+netlist_opts.sweep_constant_primary_outputs: false
+netlist_opts.netlist_verbosity             : 1
+netlist_opts.const_gen_inference           : COMB_SEQ
+
+AnalyticalPlacerOpts.analytical_solver_type: lp-b2b
+AnalyticalPlacerOpts.solver_threading: auto
+AnalyticalPlacerOpts.partial_legalizer_type: bipartitioning
+AnalyticalPlacerOpts.full_legalizer_type: appack
+AnalyticalPlacerOpts.detailed_placer_type: annealer
+AnalyticalPlacerOpts.ap_timing_tradeoff: 0.500000
+AnalyticalPlacerOpts.ap_high_fanout_threshold: 256
+AnalyticalPlacerOpts.log_verbosity: 1
+router_opts.route_type: DETAILED
+router_opts.flat_routing: false
+router_opts.choke_points: on
+router_opts.router_algorithm: TIMING_DRIVEN
+router_opts.base_cost_type: DELAY_NORMALIZED_LENGTH
+router_opts.fixed_channel_width: NO_FIXED_CHANNEL_WIDTH
+router_opts.check_route: FULL
+router_opts.acc_fac: 1.000000
+router_opts.bb_factor: 3
+router_opts.bend_cost: 0.000000
+router_opts.first_iter_pres_fac: 0.000000
+router_opts.initial_pres_fac: 0.500000
+router_opts.pres_fac_mult: 1.300000
+router_opts.max_pres_fac: 1000.000000
+router_opts.max_router_iterations: 50
+router_opts.min_incremental_reroute_fanout: 16
+router_opts.initial_acc_cost_chan_congestion_threshold: 0.500000
+router_opts.initial_acc_cost_chan_congestion_weight: 0.500000
+router_opts.do_check_rr_graph: true
+router_opts.verify_binary_search: false
+router_opts.min_channel_width_hint: 0
+router_opts.read_rr_edge_metadata: false
+router_opts.exit_after_first_routing_iteration: false
+router_opts.astar_fac: 1.200000
+router_opts.astar_offset: 0.000000
+router_opts.router_profiler_astar_fac: 1.200000
+router_opts.enable_parallel_connection_router: false
+router_opts.post_target_prune_fac: 1.200000
+router_opts.post_target_prune_offset: 0
+router_opts.multi_queue_num_threads: 1
+router_opts.multi_queue_num_queues: 2
+router_opts.multi_queue_direct_draining: false
+router_opts.criticality_exp: 1.000000
+router_opts.max_criticality: 0.990000
+router_opts.init_wirelength_abort_threshold: 0.850000
+router_opts.incr_reroute_delay_ripup: AUTO
+router_opts.save_routing_per_iteration: false
+router_opts.congested_routing_iteration_threshold_frac: 1.000000
+router_opts.high_fanout_threshold: 64
+router_opts.router_debug_net: -2
+router_opts.router_debug_sink_rr: -2
+router_opts.router_debug_iteration: -2
+router_opts.max_convergence_count: 1
+router_opts.reconvergence_cpd_threshold: 0.990000
+router_opts.update_lower_bound_delays: true
+router_opts.first_iteration_timing_report_file: 
+router_opts.route_bb_update: DYNAMIC
+router_opts.lookahead_type: MAP
+router_opts.initial_timing: LOOKAHEAD
+router_opts.router_heap: FOUR_ARY_HEAP
+router_opts.routing_failure_predictor = SAFE
+router_opts.routing_predictor_min_history: 8
+router_opts.routing_budgets_algorithm = DISABLE
+
+analysis_opts.gen_post_synthesis_netlist: false
+analysis_opts.gen_post_implementation_merged_netlist: false
+analysis_opts.gen_post_implementation_sdc: false
+analysis_opts.timing_report_npaths: 100
+analysis_opts.timing_report_skew: false
+analysis_opts.echo_dot_timing_graph_node: -1
+analysis_opts.timing_report_detail: NETLIST
+analysis_opts.post_synth_netlist_unconn_input_handling: UNCONNECTED
+analysis_opts.post_synth_netlist_unconn_output_handling: UNCONNECTED
+analysis_opts.post_synth_netlist_module_parameters: on
+
+# Building complex block graph
+# Building complex block graph took 0.00 seconds (max_rss 27.1 MiB, delta_rss +0.0 MiB)
+Circuit file: fir_top.blif
+# Load circuit
+# Load circuit took 0.01 seconds (max_rss 28.8 MiB, delta_rss +1.7 MiB)
+The entire flow of VPR took 0.04 seconds (max_rss 28.8 MiB)
+Fatal error occurred!
+OpenFPGA Abort
+
+
+Finish execution with 2 errors
+
+The entire OpenFPGA flow took 0.010374 seconds
+
+Thank you for using OpenFPGA!
+Error 1: 
+Type: Unrecognized Error
+File: /home/runner/work/OpenFPGA/OpenFPGA/vtr-verilog-to-routing/vpr/src/base/netlist.tpp
+Line: 1554
+Message: Inconsistent block data sizes
+Error 2: Command 'vpr' execution has fatal errors
+1

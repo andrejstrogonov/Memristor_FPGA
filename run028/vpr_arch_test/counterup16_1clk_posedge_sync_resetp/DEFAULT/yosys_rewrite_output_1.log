@@ -1,0 +1,24 @@
+/opt/openfpga/build/yosys/yosys yosys_rewrite_1.ys
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.68+153 (git sha1 e0bf46ebc, release, GNU /usr/lib/ccache/g++-12 12.3.0)
+
+-- Executing script file `yosys_rewrite_1.ys' --
+
+1. Executing BLIF frontend.
+
+2. Executing Verilog backend.
+
+2.1. Executing BMUXMAP pass.
+
+2.2. Executing DEMUXMAP pass.
+Dumping module `\counterup16_1clk_posedge_sync_resetp'.
+
+End of script. Logfile hash: 7a8c86aaad, time: 0.01s, user: 0.00s, system: 0.00s, MEM: 22.89 MB peak
+Yosys 0.68+153 (git sha1 e0bf46ebc, release, GNU /usr/lib/ccache/g++-12 12.3.0)
+Time spent: 35% 2x write_verilog (0 sec), 35% 2x read_blif (0 sec), ...
+0

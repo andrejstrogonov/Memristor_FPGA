@@ -1,0 +1,15 @@
+/opt/openfpga/build/yosys/yosys yosys.ys
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.68+153 (git sha1 e0bf46ebc, release, GNU /usr/lib/ccache/g++-12 12.3.0)
+
+-- Executing script file `yosys.ys' --
+
+1. Executing Verilog-2005 frontend: ./benchmark/fir.v
+Parsing Verilog input from `./benchmark/fir.v' to AST representation.
+./benchmark/fir.v:66: ERROR: syntax error, unexpected '[', expecting ')' or ',' or '='
+1

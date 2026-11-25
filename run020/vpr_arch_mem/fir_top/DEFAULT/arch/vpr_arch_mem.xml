@@ -1,0 +1,192 @@
+<?xml version="1.0"?>
+<!-- vpr_arch_mem.xml — базовая архитектура 5578-типа с мемристивной коммутацией -->
+<architecture>
+  <models>
+    <!-- io.v берётся из каталога бенчмарков VTR (vtr_benchmarks/io.v) -->
+    <model name="io">
+      <input_ports>
+        <port name="outpad" is_non_clock_global="1"/>
+      </input_ports>
+      <output_ports>
+        <port name="inpad"/>
+      </output_ports>
+    </model>
+  </models>
+
+  <layout>
+    <auto_layout aspect_ratio="1.0">
+      <perimeter type="io" priority="100"/>
+      <corners type="EMPTY" priority="101"/>
+      <fill type="clb" priority="1"/>
+    </auto_layout>
+  </layout>
+  <tiles>
+    <tile name="io" area="0">
+      <sub_tile name="io" capacity="1">
+        <equivalent_sites>
+          <site pb_type="io"/>
+        </equivalent_sites>
+        <input name="outpad" num_pins="1"/>
+        <output name="inpad" num_pins="1"/>
+        <fc in_type="frac" in_val="0.5" out_type="frac" out_val="0.25"/>
+        <pinlocations pattern="spread"/>
+      </sub_tile>
+    </tile>
+    <tile name="clb" area="14813.5">
+      <sub_tile name="clb">
+        <equivalent_sites>
+          <site pb_type="clb"/>
+        </equivalent_sites>
+        <input name="I" num_pins="10" equivalent="full"/>
+        <output name="O" num_pins="10" equivalent="none"/>
+        <clock name="clk" num_pins="1"/>
+        <fc in_type="frac" in_val="0.125" out_type="frac" out_val="0.25"/>
+        <pinlocations pattern="spread"/>
+      </sub_tile>
+    </tile>
+    <tile name="EMPTY" area="0">
+      <sub_tile name="EMPTY" capacity="1">
+        <equivalent_sites>
+          <site pb_type="EMPTY"/>
+        </equivalent_sites>
+        <fc in_type="frac" in_val="0.1" out_type="frac" out_val="0.1"/>
+      </sub_tile>
+    </tile>
+  </tiles>
+
+  <device>
+    <sizing R_minW_nmos="8926" R_minW_pmos="16067"/>
+    <area grid_logic_tile_area="14813.5"/>
+    <chan_width_distr>
+      <x distr="uniform" peak="1.000000"/>
+      <y distr="uniform" peak="1.000000"/>
+    </chan_width_distr>
+    <switch_block type="wilton" fs="3"/>
+    <connection_block input_switch_name="ipin_cblock"/>
+  </device>
+
+  <switchlist>
+    <!-- База для сравнения: КМОП-мультиплексор с буфером -->
+    <switch type="mux" name="mux_cmos"
+            R="551" Cin="1.47e-15" Cout="4e-15" Tdel="58e-12"
+            mux_trans_size="2.630740" buf_size="27.645901"/>
+
+    <!-- Мемристивная точка: R переключателя = R_on ячейки.
+         Три варианта — для перебора в эксперименте:
+         mr_1k  : R_on = 1 кОм  (верх литературы, с буфером)
+         mr_4k  : R_on = 4 кОм  (максимум требований EPFL)
+         mr_20k : R_on = 20 кОм (без буфера — худший случай) -->
+    <switch type="mux" name="mux_mr_1k"
+            R="1000" Cin="1.47e-15" Cout="4e-15" Tdel="30e-12"
+            mux_trans_size="2.630740" buf_size="27.645901"/>
+    <switch type="mux" name="mux_mr_4k"
+            R="4000" Cin="1.47e-15" Cout="4e-15" Tdel="40e-12"
+            mux_trans_size="2.630740" buf_size="27.645901"/>
+    <switch type="mux" name="mux_mr_20k"
+            R="20000" Cin="1.47e-15" Cout="4e-15" Tdel="10e-12"
+            mux_trans_size="1.000000" buf_size="27.645901"/>
+    
+    <!-- ipin_cblock switch -->
+    <switch type="mux" name="ipin_cblock" R="2231.5" Cout="0." Cin="1.47e-15" Tdel="7.247000e-11" mux_trans_size="1.222260" buf_size="auto"/>
+  </switchlist>
+
+  <segmentlist>
+    <!-- Доли сегментов — переменная эксперимента №4: 100% L4 (база),
+         затем 87% L4 / 13% L16 (как в Stratix IV) и др. -->
+    <segment name="L4" length="4" freq="1.000000" type="unidir"
+             Rmetal="101.25" Cmetal="2.22565e-14">
+      <mux name="mux_mr_1k"/>
+      <sb type="pattern">1 1 1 1 1</sb>
+      <cb type="pattern">1 1 1 1</cb>
+    </segment>
+
+    <segment name="L16" length="16" freq="0.000000" type="unidir"
+             Rmetal="101.25" Cmetal="2.22565e-14">
+      <mux name="mux_mr_1k"/>
+      <sb type="pattern">1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</sb>
+      <cb type="pattern">1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</cb>
+    </segment>
+  </segmentlist>
+
+  <complexblocklist>
+    <!-- EMPTY block for corners -->
+    <pb_type name="EMPTY">
+      <input name="dummy" num_pins="1"/>
+      <output name="dummy_out" num_pins="1"/>
+      <interconnect>
+        <direct name="pass" input="EMPTY.dummy" output="EMPTY.dummy_out"/>
+      </interconnect>
+    </pb_type>
+
+    <!-- Ввод-вывод -->
+    <pb_type name="io">
+      <input name="outpad" num_pins="1"/>
+      <output name="inpad" num_pins="1"/>
+      <fc default_in_type="frac" in="0.5" out="0.25"/>
+      <pb_type name="iopad" blif_model=".subckt io" num_pb="1">
+        <input name="outpad" num_pins="1"/>
+        <output name="inpad" num_pins="1"/>
+      </pb_type>
+      <interconnect>
+        <direct name="out" input="io.outpad" output="iopad.outpad">
+          <delay_constant max="73e-12" in_port="io.outpad" out_port="iopad.outpad"/>
+        </direct>
+        <direct name="in"  input="iopad.inpad" output="io.inpad">
+          <delay_constant max="73e-12" in_port="iopad.inpad" out_port="io.inpad"/>
+        </direct>
+      </interconnect>
+    </pb_type>
+
+    <!-- Логический блок: кластер из 10 ЛЭ (BLE), как в примере статьи fpga-e.ru -->
+    <pb_type name="clb">
+      <input  name="I"   num_pins="10" equivalent="full"/>
+      <output name="O"   num_pins="10" equivalent="none"/>
+      <clock  name="clk" num_pins="1"/>
+      <fc default_in_type="frac" in="0.125" out="0.25"/>
+
+      <pb_type name="ble" num_pb="10">
+        <input  name="in"  num_pins="4"/>
+        <output name="out" num_pins="1"/>
+        <clock  name="clk" num_pins="1"/>
+
+        <pb_type name="lut4" blif_model=".names" num_pb="1" class="lut">
+          <input  name="in"  num_pins="4" port_class="lut_in"/>
+          <output name="out" num_pins="1" port_class="lut_out"/>
+          <!-- Задержка LUT: 0.66 нс на вход (как в классике VTR) -->
+          <delay_matrix type="max" in_port="lut4.in" out_port="lut4.out">
+            66e-12 66e-12 66e-12 66e-12
+          </delay_matrix>
+        </pb_type>
+
+        <pb_type name="ff" blif_model=".latch" num_pb="1" class="flipflop">
+          <input  name="D"   num_pins="1" port_class="D"/>
+          <output name="Q"   num_pins="1" port_class="Q"/>
+          <clock  name="clk" num_pins="1" port_class="clock"/>
+          <T_setup    value="66e-12"  port="ff.D" clock="clk"/>
+          <T_clock_to_Q max="124e-12" port="ff.Q" clock="clk"/>
+        </pb_type>
+
+        <interconnect>
+          <direct name="d_ff" input="lut4.out" output="ff.D"/>
+          <mux name="mux_out" input="lut4.out ff.Q" output="ble.out">
+            <delay_constant max="54e-12" in_port="ff.Q" out_port="ble.out"/>
+            <delay_constant max="54e-12" in_port="lut4.out" out_port="ble.out"/>
+          </mux>
+          <complete name="clk" input="ble.clk" output="ff.clk"/>
+        </interconnect>
+      </pb_type>
+
+      <interconnect>
+        <!-- Кроссбар локальной коммутации: полный мультиплексор, как в статье -->
+        <complete name="crossbar" input="clb.I ble[9:0].out" output="ble[9:0].in">
+          <delay_constant max="65e-12" in_port="clb.I" out_port="ble[9:0].in"/>
+          <delay_constant max="65e-12" in_port="ble[9:0].out" out_port="ble[9:0].in"/>
+        </complete>
+        <complete name="clks" input="clb.clk" output="ble[9:0].clk">
+          <delay_constant max="66e-12" in_port="clb.clk" out_port="ble[9:0].clk"/>
+        </complete>
+        <direct name="out" input="ble[9:0].out" output="clb.O"/>
+      </interconnect>
+    </pb_type>
+  </complexblocklist>
+</architecture>

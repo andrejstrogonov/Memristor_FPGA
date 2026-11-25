@@ -1,0 +1,109 @@
+<openfpga_architecture>
+  <technology_library>
+    <circuit_library>
+      <circuit_model type="inv_buf" name="INVTX1" prefix="INVTX1" is_default="true">
+        <design_technology type="cmos" topology="inverter" size="1"/>
+        <input_buffer exist="false"/>
+        <output_buffer exist="false"/>
+        <port type="input"  prefix="in"  lib_name="A" size="1"/>
+        <port type="output" prefix="out" lib_name="Y" size="1"/>
+        <delay_matrix type="rise" in_port="INVTX1.in" out_port="INVTX1.out">23e-12</delay_matrix>
+        <delay_matrix type="fall" in_port="INVTX1.in" out_port="INVTX1.out">25e-12</delay_matrix>
+      </circuit_model>
+
+      <circuit_model type="pass_gate" name="TGATE" prefix="TGATE" is_default="true">
+        <design_technology type="cmos" topology="transmission_gate" nmos_size="2" pmos_size="6"/>
+        <input_buffer exist="false"/>
+        <output_buffer exist="false"/>
+        <port type="input"  prefix="in"  lib_name="A" size="1"/>
+        <port type="input"  prefix="sel" lib_name="S" size="1"/>
+        <port type="output" prefix="out" lib_name="Y" size="1"/>
+      </circuit_model>
+
+      <circuit_model type="sram" name="rram_1t1r" prefix="rram_1t1r"
+                     verilog_netlist="${PATH:OPENFPGA_PATH}/openfpga_flow/openfpga_cell_library/verilog/rram_1t1r.v">
+        <design_technology type="rram"/>
+        <input_buffer exist="false"/>
+        <output_buffer exist="false"/>
+        <port type="bl"   prefix="bl"   size="1"/>
+        <port type="wl"   prefix="wl"   size="1"/>
+        <port type="out"  prefix="out"  size="1"/>
+        <port type="outb" prefix="outb" size="1"/>
+      </circuit_model>
+
+      <circuit_model type="ccff" name="ccff_rram" prefix="ccff_rram"
+                     verilog_netlist="${PATH:OPENFPGA_PATH}/openfpga_flow/openfpga_cell_library/verilog/rram_ccff.v">
+        <input_buffer exist="false"/>
+        <output_buffer exist="false"/>
+        <port type="input" prefix="p_reset" size="1" is_global="true" default_val="0" is_reset="true"/>
+        <port type="input" prefix="p_set"   size="1" is_global="true" default_val="0" is_set="true"/>
+        <port type="clock" prefix="prog_clk" size="1" is_global="true" is_prog="true"/>
+        <port type="input"  prefix="ccff_head" size="1"/>
+        <port type="output" prefix="ccff_tail" size="1"/>
+        <port type="output" prefix="mem_out"   size="1"/>
+        <port type="output" prefix="mem_outb"  size="1"/>
+      </circuit_model>
+
+      <circuit_model type="mux" name="mux_rram_1level" prefix="mux_rram_1level"
+                     is_default="true" dump_structural_verilog="true">
+        <design_technology type="rram" structure="one_level" rram_circuit_model_name="rram_1t1r"/>
+        <input_buffer exist="true"  circuit_model_name="INVTX1"/>
+        <output_buffer exist="true" circuit_model_name="INVTX1"/>
+        <port type="input"  prefix="in"   size="1"/>
+        <port type="output" prefix="out"  size="1"/>
+        <port type="sram"   prefix="sram" size="1"/>
+      </circuit_model>
+
+      <circuit_model type="lut" name="lut4" prefix="lut4" dump_structural_verilog="true">
+        <design_technology type="cmos"/>
+        <input_buffer exist="true"  circuit_model_name="INVTX1"/>
+        <output_buffer exist="true" circuit_model_name="INVTX1"/>
+        <lut_input_inverter exist="true" circuit_model_name="INVTX1"/>
+        <pass_gate_logic circuit_model_name="TGATE"/>
+        <port type="input"  prefix="in"  lib_name="A" size="4"/>
+        <port type="output" prefix="out" lib_name="Y" size="1"/>
+        <port type="sram"   prefix="sram" size="16"/>
+      </circuit_model>
+
+      <circuit_model type="ff" name="STD_CC" prefix="STD_CC" is_default="true">
+        <design_technology type="cmos"/>
+        <input_buffer exist="true"  circuit_model_name="INVTX1"/>
+        <output_buffer exist="true" circuit_model_name="INVTX1"/>
+        <port type="clock"  prefix="clk" size="1" is_global="true"/>
+        <port type="input"  prefix="D" size="1"/>
+        <port type="output" prefix="Q" size="1"/>
+      </circuit_model>
+
+      <circuit_model type="iopad" name="io" prefix="io" is_default="true">
+        <design_technology type="cmos"/>
+        <input_buffer exist="true"  circuit_model_name="INVTX1"/>
+        <output_buffer exist="true" circuit_model_name="INVTX1"/>
+        <port type="input"  prefix="inpad"  lib_name="A" size="1"/>
+        <port type="output" prefix="outpad" lib_name="Y" size="1"/>
+      </circuit_model>
+
+      <circuit_model type="chan_wire" name="wire" prefix="wire"/>
+    </circuit_library>
+  </technology_library>
+
+  <configuration_protocol>
+    <organization type="scan_chain" circuit_model_name="ccff_rram"/>
+  </configuration_protocol>
+
+  <connection_block>
+    <switch name="ipin_cblock" circuit_model_name="mux_rram_1level"/>
+  </connection_block>
+  <switch_block>
+    <switch name="mux_mr_1k" circuit_model_name="mux_rram_1level"/>
+  </switch_block>
+  <routing_segment>
+    <segment name="L4"  circuit_model_name="wire"/>
+    <segment name="L16" circuit_model_name="wire"/>
+  </routing_segment>
+
+  <pb_type_annotations>
+    <pb_type name="io.iopad"     circuit_model_name="io"/>
+    <pb_type name="clb.ble.lut4" circuit_model_name="lut4" mode_bits="16"/>
+    <pb_type name="clb.ble.ff"   circuit_model_name="STD_CC"/>
+  </pb_type_annotations>
+</openfpga_architecture>

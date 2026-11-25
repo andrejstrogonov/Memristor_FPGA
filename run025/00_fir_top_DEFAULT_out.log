@@ -1,0 +1,30 @@
+* * * * * * * * * * * * * * * * * * * * 
+RunDirectory : /opt/openfpga/openfpga_flow/tasks/memristor_fir/run025
+python3.10 /opt/openfpga/openfpga_flow/scripts/run_fpga_flow.py /opt/openfpga/openfpga_flow/tasks/memristor_fir/vpr_arch_test.xml /opt/openfpga/openfpga_flow/tasks/memristor_fir/fir.v /opt/openfpga/openfpga_flow/tasks/memristor_fir/rram_1t1r.v --top_module fir_top --run_dir /opt/openfpga/openfpga_flow/tasks/memristor_fir/run025/vpr_arch_test/fir_top/DEFAULT --fpga_flow yosys_vpr --openfpga_shell_template /opt/openfpga/openfpga_flow/openfpga_shell_scripts/example_without_ace_script.openfpga --openfpga_arch_file /opt/openfpga/openfpga_flow/tasks/memristor_fir/openfpga_arch_test.xml --openfpga_sim_setting_file /opt/openfpga/openfpga_flow/openfpga_simulation_settings/fixed_sim_openfpga.xml --yosys_tmpl /opt/openfpga/openfpga_flow/misc/ys_tmpl_yosys_vpr_flow.ys --ys_rewrite_tmpl /opt/openfpga/openfpga_flow/misc/ys_tmpl_yosys_vpr_flow_with_rewrite.ys;/opt/openfpga/openfpga_flow/misc/ys_tmpl_rewrite_flow.ys --vpr_fpga_verilog --vpr_fpga_verilog_dir /opt/openfpga/openfpga_flow/tasks/memristor_fir/run025/vpr_arch_test/fir_top/DEFAULT --vpr_fpga_x2p_rename_illegal_port --end_flow_with_test --vpr_fpga_verilog_formal_verification_top_netlist --flow_config /opt/openfpga/openfpga_flow/tasks/memristor_fir/config/task.conf --default_tool_path /opt/openfpga/openfpga_flow/scripts/../misc/fpgaflow_default_tool_path.conf --TOP fir_top --READ_VERILOG_OPTIONS -nolatches
+* * * * * * * * * * * * * * * * * * * * 
+INFO - Validating command line arguments
+INFO - Run directory : /opt/openfpga/openfpga_flow/tasks/memristor_fir/run025/vpr_arch_test/fir_top/DEFAULT
+INFO - Running "yosys_vpr" Flow
+INFO - Extracted lut_size size from arch XML = 6
+INFO - Running Yosys with lut_size = 6
+INFO - Launching Run yosys 
+INFO - Run yosys is written in file yosys_output.log
+INFO - Extracted lut_size size from arch XML = 6
+INFO - Running Yosys with lut_size = 6
+INFO - Yosys rewrite iteration: 0
+INFO - Launching Run yosys 
+INFO - Run yosys is written in file yosys_rewrite_output_0.log
+INFO - Yosys rewrite iteration: 1
+INFO - Launching Run yosys 
+INFO - Run yosys is written in file yosys_rewrite_output_1.log
+INFO - Running OpenFPGA Shell Engine 
+INFO - Launching OpenFPGA Shell Run 
+INFO - OpenFPGAShell Revision: v8.0.0-18649-g0b912334fd Compiled: 2026-11-22T04:09:46
+ERROR - OpenFPGA Shell Run run failed with returncode 1
+ERROR - command /opt/openfpga/build/openfpga/openfpga -batch -f fir_top_run.openfpga
+ERROR - -->>Error 1: 
+ERROR - -->>Type: Unrecognized Error
+ERROR - -->>Error 2: Command 'vpr' execution has fatal errors
+ERROR - Current working directory : /opt/openfpga/openfpga_flow/tasks/memristor_fir/run025/vpr_arch_test/fir_top/DEFAULT
+ERROR - Failed to run OpenFPGA Shell Run task
+ERROR - Exiting . . . . . .

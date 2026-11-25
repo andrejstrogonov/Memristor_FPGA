@@ -1,0 +1,2 @@
+/opt/openfpga/build/openfpga/openfpga -batch -f fir_top_run.openfpga
+-11
