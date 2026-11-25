@@ -1,62 +1,120 @@
 # Мемристорные FPGA: архитектурные подходы, моделирование и экспериментальная оценка на платформе OpenFPGA
 
-**Авторы:** Кирилл Гопенко, Андрей Строгонов
-**Научный руководитель:** проф. Стогонов А.В.  
-**Организация:** Вольгоградский государственный технический университет (ВГТУ)  
-**Кафедра:** Микроэлектроника и твердотельная электроника  
-**Дата:** Ноябрь 2026 г.
+**УДК 621.382.049.77:004.3**
+
+**Авторы:** К. А. Гопенко, А. В. Строгонов
+**Научное руководство:** проф., д-р техн. наук А. В. Строгонов
+**Организация:** Волгоградский государственный технический университет (ВГТУ)
+**Кафедра:** «Микроэлектроника и твердотельная электроника»
+**E-mail:** [указать]
+**Дата:** ноябрь 2026 г.
 
 ---
 
 ## Аннотация
 
-В работе рассматриваются архитектурные подходы к интеграции мемристорных (RRAM) коммутационных элементов в полевые программируемые шлюзы (FPGA). Предложена методология моделирования мемристорных FPGA на базе открытого фреймворка OpenFPGA с использованием VPR 9.0 и Yosys. Разработана параметризуемая VPR-архитектура с поддержкой 1T1R RRAM ячеек в свитч-блоках и connection blocks. Проведен сравнительный анализ задержек, площади и энергопотребления для трех режимов сопротивления RRAM в ON-состоянии (1 кОм, 4 кОм, 20 кОм) против CMOS-базы. Показано, что при R_ON ≤ 4 кОм мемристорная архитектура демонстрирует выигрыш в задержке маршрутизации до 35% при сравнительной площади, а при R_ON = 20 кОм наблюдается деградация таймингов на 2.8×. Полученные Verilog-нетлисты FPGA ткани и битстримы конфигурации валидированы через формальную верификацию.
+**Актуальность.** Ограничение доступа к передовым технологическим узлам и прекращение поставок импортных ПЛИС (Xilinx/AMD, Intel/Altera, Lattice) ставят задачу создания отечественной элементной базы. Традиционные SRAM-FPGA обладают принципиальными недостатками: волатильностью конфигурации, высоким статическим потреблением и низкой радиационной стойкостью. Мемристорные (RRAM) коммутационные элементы обеспечивают энергонезависимость, повышенную плотность и радиационную стойкость, однако открытый маршрут проектирования (CAD flow) для них до настоящего времени отсутствовал.
 
-**Ключевые слова:** FPGA, RRAM, мемристор, 1T1R, OpenFPGA, VPR, Yosys, архитектура ПЛИС, невостатичная память, реконфигурируемые вычисления.
+**Цель работы.** Разработка и экспериментальная апробация полного маршрута проектирования мемристорных FPGA «от RTL до битстрима» на базе открытого фреймворка OpenFPGA (VPR 9.0, Yosys) и количественная оценка влияния сопротивления RRAM в состоянии ON (R_ON) на задержку, площадь и энергопотребление.
+
+**Методы.** Применены методы архитектурного моделирования ПЛИС (VPR), логического синтеза (Yosys + ABC), генерации конфигурационного битстрима (OpenFPGA Shell) и статического временного анализа (STA). Разработаны параметризуемая VPR-архитектура, OpenFPGA-архитектура с привязкой circuit models к Verilog-моделям 1T1R ячеек, а также поведенческие модели 1T1R RRAM и CCFF.
+
+**Результаты.** Для трёх классов RRAM-свитчей (R_ON = 1, 4, 20 кОм) относительно CMOS-базы (551 Ом) получены оценки критического пути 0,65×/0,85×/2,8×, площади маршрутизации 0,92×/0,95×/1,05× и статического потребления (~0). Установлено технологическое окно применимости R_ON ≤ 4 кОм, в котором мемристорная архитектура обеспечивает выигрыш по задержке маршрутизации до 35 % при сопоставимой площади.
+
+**Выводы.** Продемонстрирована работоспособность предложенного маршрута и подтверждена перспективность RRAM-свитчей для энергонезависимых ПЛИС при R_ON ≤ 4 кОм. Сгенерированные Verilog-нетлисты и битстримы валидированы средствами формальной верификации.
+
+**Ключевые слова:** FPGA, ПЛИС, RRAM, мемристор, 1T1R, энергонезависимая память, OpenFPGA, VPR, Yosys, архитектура ПЛИС, реконфигурируемые вычисления, автоматизация проектирования.
+
+---
+
+## Abstract
+
+**Relevance.** Restricted access to advanced technology nodes and the discontinuation of foreign FPGA supplies (Xilinx/AMD, Intel/Altera, Lattice) make the development of a domestic component base a priority. Conventional SRAM-based FPGAs suffer from configuration volatility, high static power, and low radiation tolerance. Resistive RAM (RRAM) switching elements offer non-volatility, higher density, and radiation hardness; however, an open CAD flow for them has been unavailable until now.
+
+**Objective.** To develop and experimentally validate a complete RTL-to-bitstream design flow for memristor FPGAs on the open-source OpenFPGA framework (VPR 9.0, Yosys) and to quantify the effect of the ON-state RRAM resistance (R_ON) on delay, area, and power.
+
+**Methods.** FPGA architectural modeling (VPR), logic synthesis (Yosys + ABC), bitstream generation (OpenFPGA Shell), and static timing analysis (STA) were used. A parameterizable VPR architecture, an OpenFPGA architecture binding circuit models to Verilog models of 1T1R cells, and behavioral models of 1T1R RRAM and CCFF were developed.
+
+**Results.** For three RRAM switch classes (R_ON = 1, 4, 20 kΩ) versus the CMOS baseline (551 Ω), the critical path ratios 0.65×/0.85×/2.8×, routing area ratios 0.92×/0.95×/1.05×, and near-zero static power were obtained. A technology window of applicability, R_ON ≤ 4 kΩ, is identified, in which the memristor architecture provides up to 35 % routing-delay improvement at comparable area.
+
+**Conclusions.** The proposed flow is demonstrated to be operational, and the promise of RRAM switches for non-volatile FPGAs at R_ON ≤ 4 kΩ is confirmed. The generated Verilog netlists and bitstreams are validated by formal verification.
+
+**Keywords:** FPGA, RRAM, memristor, 1T1R, non-volatile memory, OpenFPGA, VPR, Yosys, FPGA architecture, reconfigurable computing, computer-aided design.
 
 ---
 
 # АКТУАЛЬНОСТЬ ИССЛЕДОВАНИЯ
 
-Актуальность работы определяется стратегической необходимостью обеспечения технологического суверенитета РФ в области микроэлектроники и вычислительных систем в условиях санкционного давления и ограничения доступа к передовым технологическим узлам (28/16/7 нм). 
+Актуальность работы обусловлена необходимостью обеспечения технологической независимости Российской Федерации в области микроэлектроники и вычислительной техники в условиях санкционных ограничений и прекращения поставок импортных программируемых логических интегральных схем (ПЛИС).
 
-**Ключевые драйверы актуальности:**
+**Драйверы актуальности:**
 
-1. **Национальные приоритеты** — Соответствует приоритетному направлению «Микроэлектроника и фотоника» Стратегии научно-технологического развития РФ до 2030 г., а также федеральному проекту «Развитие производства электронной компонентной базы» (нацпроект «Цифровая экономика»).
+1. **Государственные приоритеты.** Тема соответствует приоритетному направлению «Микроэлектроника и фотоника» Стратегии научно-технологического развития РФ (Указ Президента РФ № 145 от 28.02.2024) и федеральному проекту «Развитие производства электронной компонентной базы» (нацпроект «Цифровая экономика»).
 
-2. **Критическая зависимость от импорта** — 95%+ используемых в РФ FPGA (Xilinx/AMD, Intel/Altera, Lattice) являются импортными; остановка поставок в 2022–2024 гг. парализовала разработку радиоэлектронных средств оборонного и гражданского назначения.
+2. **Импортозависимость.** Более 95 % применяемых в РФ ПЛИС являются импортными. Прекращение поставок в 2022–2024 гг. привело к критической зависимости разработки радиоэлектронных средств (РЭС) оборонного и гражданского назначения от зарубежной элементной базы.
 
-3. **Фундаментальные ограничения SRAM-FPGA** — Волатильность конфигурации, статическое потребление (до 40% общего power budget), уязвимость к SEU в авиакосмических применениях, площадь 6T-SRAM (~140 F²) ограничивают масштабирование.
+3. **Принципиальные ограничения SRAM-ПЛИС.** Конфигурационная память на 6T-SRAM характеризуется волатильностью (необходимость загрузки битстрима при каждом включении), высоким статическим потреблением (до 40 % бюджета мощности), низкой радиационной стойкостью (уязвимость к одиночным сбоям, SEU) и большой площадью ячейки (~140 F² при 28 нм), что ограничивает масштабирование.
 
-4. **Перспективы RRAM** — Невостатичность (instant-on, zero standby power), плотность 1T1R ~4–8 F² (17–35× выигрыш vs SRAM), радиостойкость, совместимость с BEOL-процессами позволяют создавать автономные radiation-hard ПЛИС отечественного производства.
+4. **Преимущества RRAM.** Мемристорные (1T1R) ячейки обеспечивают энергонезависимость (режим instant-on, нулевое standby-потребление), плотность ~4–8 F² (в 17–35 раз выше, чем у 6T-SRAM), радиационную стойкость и совместимость с BEOL-процессами, что открывает путь к созданию автономных radiation-hard ПЛИС отечественного производства.
 
-5. **Отсутствие открытого CAD flow** — Проприетарные инструменты (Vivado, Quartus) не поддерживают custom архитектуры с RRAM; открытый OpenFPGA — единственная платформа для академических и малых команд разработки end-to-end flow до битстрима.
+5. **Отсутствие открытого маршрута проектирования.** Проприетарные САПР (Vivado, Quartus) не поддерживают исследовательские архитектуры с RRAM; открытый фреймворк OpenFPGA является единственной платформой, позволяющей академическим коллективам реализовать сквозной маршрут «RTL → битстрим» для перспективных архитектур.
+
+Таким образом, разработка и верификация открытого маршрута проектирования мемристорных ПЛИС представляет собой актуальную научно-техническую задачу, имеющую как фундаментальное (архитектура вычислительных систем), так и прикладное (импортозамещение элементной базы) значение.
 
 ---
 
 # НАУЧНАЯ НОВИЗНА
 
-Научная новизна работы заключается в **первой в открытой литературе реализации полного end-to-end CAD flow для мемристорных FPGA на базе OpenFPGA/VPR 9.0/Yosys**, включающей:
+Научная новизна работы состоит в **создании первого в открытой литературе сквозного маршрута автоматизированного проектирования мемристорных ПЛИС на базе OpenFPGA/VPR 9.0/Yosys** и в получении новых количественных оценок влияния параметров RRAM-свитчей на характеристики FPGA. Конкретно новыми являются:
 
-1. **Параметризуемую VPR-архитектуру** (`vpr_arch_mem.xml`) с поддержкой трех классов RRAM-свитчей (R_ON = 1/4/20 кОм) в routing multiplexers и connection blocks, совместимую с analytical placer VPR 9.0 и unidir routing graph.
+1. **Параметризуемая VPR-архитектура** (`vpr_arch_mem.xml`) с поддержкой трёх классов RRAM-свитчей (R_ON = 1/4/20 кОм) в routing multiplexers и connection blocks, совместимая с аналитическим размещением (analytical placer) VPR 9.0 и однонаправленной (unidir) топологией трассировки.
 
-2. **OpenFPGA-архитектуру** (`openfpga_arch_mem.xml`) с привязкой circuit models к Verilog/SPICE нетлистам 1T1R RRAM ячеек и CCFF на базе scan-chain конфигурационного протокола.
+2. **OpenFPGA-архитектура** (`openfpga_arch_mem.xml`) с привязкой circuit models к Verilog/SPICE-нетлистам 1T1R RRAM-ячеек и CCFF на основе scan-chain протокола конфигурирования.
 
-3. **Поведенческую Verilog-модель 1T1R RRAM** (`rram_1t1r.v`) и CCFF (`rram_ccff.v`) для функциональной симуляции и формальной верификации сгенерированных битстримов.
+3. **Поведенческие Verilog-модели** 1T1R RRAM (`rram_1t1r.v`) и CCFF (`rram_ccff.v`), пригодные для функциональной симуляции и формальной верификации генерируемых битстримов.
 
-4. **Тестовый бенчмарк 8-тапного FIR фильтра** (`fir.v`) с мемристорным хранением коэффициентов в массиве 1T1R ячеек — первый пример прикладного дизайна с embedded RRAM storage в открытом flow.
+4. **Тестовый бенчмарк** 8-отводного КИХ-фильтра (`fir.v`) с мемристорным хранением коэффициентов в массиве 1T1R-ячеек — первый пример прикладного проекта со встроенным RRAM-хранилищем в открытом маршруте.
 
-5. **Сравнительный архитектурный анализ** трех режимов RRAM (1/4/20 кОм) против CMOS-базы (k4_N4, 551 Ом) по метрикам: critical path delay (0.65×/0.85×/2.8×), routing area (0.92×/0.95×/1.05×), static power (~0 vs high) — с идентификацией технологического окна применимости R_ON ≤ 4 кОм.
+5. **Сравнительный архитектурный анализ** трёх режимов RRAM (1/4/20 кОм) относительно CMOS-базы (k4_N4, 551 Ом) по метрикам критического пути (0,65×/0,85×/2,8×), площади маршрутизации (0,92×/0,95×/1,05×) и статического потребления, с определением технологического окна применимости R_ON ≤ 4 кОм.
 
-6. **Docker-инфраструктуру** для воспроизводимых экспериментов в изолированном окружении (Ubuntu 22.04, OpenFPGA master, VPR 9.0, Yosys 0.68+), устраняющую проблему «works on my machine» при рецензировании и передаче результатов.
+6. **Воспроизводимая программная инфраструктура** (Docker) для проведения экспериментов в изолированном окружении (Ubuntu 22.04, OpenFPGA master, VPR 9.0, Yosys 0.68+), обеспечивающая воспроизводимость результатов при рецензировании и передаче.
 
-**Практическая значимость:** Созданный flow позволяет исследовательским коллективам без доступа к проприетарным EDA инструментам проводить архитектурную разведку мемристорных FPGA, генерировать битстримы для tape-out в отечественных процессах (180/90/65 нм), и обучать кадров на актуальном стеке.
+Отличие от известных работ [4–9] состоит в том, что впервые предложенные архитектурные решения доведены до генерации верифицируемого битстрима в открытом инструментальном потоке, а не ограничены аналитическим моделированием или проприетарными САПР.
+
+---
+
+# ЦЕЛЬ И ЗАДАЧИ ИССЛЕДОВАНИЯ
+
+**Цель работы** — разработка и экспериментальная апробация сквозного маршрута проектирования мемристорных ПЛИС на базе открытого фреймворка OpenFPGA и количественная оценка влияния сопротивления RRAM-свитчей в состоянии ON на задержку, площадь и энергопотребление.
+
+Для достижения цели решались следующие **задачи:**
+
+1. Проанализировать современное состояние исследований мемристорных ПЛИС и существующие открытые средства автоматизации проектирования.
+2. Разработать параметризуемую VPR-архитектуру с поддержкой RRAM-свитчей трёх классов сопротивления.
+3. Разработать OpenFPGA-архитектуру и поведенческие Verilog-модели 1T1R-ячеек и CCFF.
+4. Реализовать тестовый прикладной проект (КИХ-фильтр) с мемристорным хранением коэффициентов.
+5. Провести сравнительный анализ характеристик RRAM- и CMOS-архитектур и определить область применимости.
+6. Верифицировать сгенерированные нетлисты и битстримы средствами формальной верификации.
+
+---
+
+# ПОЛОЖЕНИЯ, ВЫНОСИМЫЕ НА ЗАЩИТУ
+
+1. Параметризуемая архитектура мемристорной ПЛИС, обеспечивающая сквозной маршрут проектирования «RTL → битстрим» в открытом фреймворке OpenFPGA.
+2. Методика привязки поведенческих Verilog-моделей 1T1R RRAM и CCFF к circuit models OpenFPGA, обеспечивающая корректную генерацию и верификацию конфигурационных битстримов.
+3. Результаты количественной оценки влияния R_ON на задержку, площадь и энергопотребление, устанавливающие технологическое окно применимости мемристорных свитчей R_ON ≤ 4 кОм.
+
+---
+
+# ПРАКТИЧЕСКАЯ ЗНАЧИМОСТЬ
+
+Разработанный маршрут позволяет исследовательским коллективам, не имеющим доступа к проприетарным САПР, проводить архитектурные исследования мемристорных ПЛИС, генерировать конфигурационные битстримы для последующей реализации в отечественных технологических процессах (180/90/65 нм) и вести подготовку инженерных кадров на актуальном инструментальном стеке. Полученные результаты могут быть использованы при формировании технических требований к перспективным энергонезависимым ПЛИС, а также в учебном процессе по направлениям «Электроника и наноэлектроника» и «Информатика и вычислительная техника».
 
 ---
 
 ## 1. Введение
 
-Современные FPGA на базе SRAM-конфигурационной памяти сталкиваются с фундаментальными ограничениями: волатильность конфигурации (необходимость внешней загрузки битстрима при включении), значительная площадь 6T-SRAM ячейки (~140 F² при 28 нм), утечки тока в standby-режиме и уязвимость к однобитным сбоям (SEU) в условиях излучения. Мемристорные (Resistive RAM, RRAM) ячейки предлагают альтернативу с невостатичностью, высокой плотностью (4–8 F² для 1T1R), быстрым переключением (<10 нс) и радиостойкостью [1,2].
+Современные FPGA на базе SRAM-конфигурационной памяти сталкиваются с фундаментальными ограничениями: волатильность конфигурации (необходимость внешней загрузки битстрима при включении), значительная площадь 6T-SRAM ячейки (~140 F² при 28 нм), утечки тока в standby-режиме и уязвимость к однобитным сбоям (SEU) в условиях излучения. Мемристорные (Resistive RAM, RRAM) ячейки предлагают альтернативу с энергонезависимостью, высокой плотностью (4–8 F² для 1T1R), быстрым переключением (<10 нс) и радиационной стойкостью [1, 2].
 
 Интеграция RRAM в FPGA архитектуру требует решения трех ключевых задач:
 1. **Устройство**: моделирование 1T1R ячейки с учетом вариативности R_ON/R_OFF, endurance, retention.
@@ -73,12 +131,12 @@
 
 **Ранние работы (2010–2015):**  
 - *Semiconductor Research Corporation (SRC) / University of Michigan*: первые демонстрации RRAM-based routing multiplexers [4]. Показан выигрыш в площади 2–3× по сравнению с 6T-SRAM при сопоставимых задержках для R_ON < 5 кОм.
-- *Wong et al., ISSCC 2012* [5]: 1T1R RRAM массив для конфигурационной памяти FPGA, демонстрация невостатичного wake-up < 1 мс.
+- *Wong et al., ISSCC 2012* [5]: 1T1R RRAM-массив для конфигурационной памяти FPGA, демонстрация энергонезависимого пробуждения (wake-up) < 1 мс.
 
 **Современные архитектурные исследования (2016–2023):**  
 - *Gao et al., FPGA 2017* [6]: аналитическая модель задержки RRAM-свитча с учетом parasitic R/C линий бита/слова. Введена метрика "effective R_ON" с учетом IR drop.
 - *Liu et al., TCAD 2019* [7]: сравнение 1T1R vs 2T2R vs complementary RRAM свитчей. Показано, что complementary схема дает лучший SNM но требует 2× площадь.
-- *Yao et al., JSSC 2021* [8]: tape-out 28-нм FPGA с гибридной SRAM/RRAM конфигурацией. RRAM используется только для невостатичного хранения, SRAM — для runtime reconfiguration.
+- *Yao et al., JSSC 2021* [8]: изготовлен 28-нм FPGA с гибридной SRAM/RRAM-конфигурацией. RRAM используется только для энергонезависимого хранения, SRAM — для runtime-реконфигурации.
 - *Xilinx/AMD Research (patents US2020/US2022)*: архитектуры с embedded RRAM блоками для AI inference weights.
 
 **Открытые CAD фреймворки:**  
@@ -353,54 +411,60 @@ INFO - 00_counterup16_1clk_posedge_sync_resetp_DEFAULT Finished with returncode 
 
 ## 7. Заключение
 
-Работой продемонстрирован первый в открытом доступе end-to-end flow проектирования мемристорных FPGA на платформе OpenFPGA. Созданы:
-- Параметризуемая VPR архитектура с поддержкой 1T1R RRAM свитчей трех классов R_ON
-- OpenFPGA архитектура с привязкой к Verilog/SPICE моделям RRAM ячеек
-- Тестовый FIR дизайн с мемристорным хранением коэффициентов
-- Docker-инфраструктура для воспроизводимых экспериментов
+В работе впервые в открытом доступе реализован сквозной маршрут проектирования мемристорных ПЛИС на платформе OpenFPGA. Разработаны:
+- параметризуемая VPR-архитектура с поддержкой 1T1R RRAM-свитчей трёх классов R_ON;
+- OpenFPGA-архитектура с привязкой к Verilog/SPICE-моделям RRAM-ячеек;
+- поведенческие модели 1T1R-ячейки и CCFF, пригодные для верификации битстримов;
+- тестовый проект КИХ-фильтра с мемристорным хранением коэффициентов;
+- воспроизводимая Docker-инфраструктура для экспериментов.
 
-Показано, что при технологически реалистичных R_ON ≤ 4 кОм мемристорные FPGA превосходят SRAM-базу по задержке маршрутизации и статическому потреблению, сохраняя сопоставимую площадь. Главный вызов — вариативность R_ON и интеграция точных timing моделей в архитектурный CAD flow.
+Показано, что при технологически реалистичных значениях R_ON ≤ 4 кОм мемристорные ПЛИС превосходят SRAM-базу по задержке маршрутизации (до 35 %) и статическому потреблению при сопоставимой площади; при R_ON = 20 кОм наблюдается деградация задержки в 2,8 раза, что ограничивает область применения. Основными вызовами остаются вариативность R_ON и интеграция точных (SPICE-калиброванных) моделей задержки в архитектурный маршрут проектирования.
+
+Полученные результаты создают научно-методическую основу для дальнейших исследований энергонезависимых ПЛИС и формирования требований к отечественной элементной базе.
 
 ---
 
-## Библиография
+## Вклад авторов
 
-### Фундаментальные работы по RRAM
-1. **Chua L.** "Memristor — The Missing Circuit Element". *IEEE Transactions on Circuit Theory*, vol. 18, no. 5, pp. 507–519, 1971. DOI: 10.1109/TCT.1971.1083337
-2. **Strukov D.B., Snider G.S., Stewart D.R., Williams R.S.** "The Missing Memristor Found". *Nature*, vol. 453, pp. 80–83, 2008. DOI: 10.1038/nature06932
-3. **Waser R., Aono M.** "Nanoionics-based Resistive Switching Memories". *Nature Materials*, vol. 6, pp. 833–840, 2007. DOI: 10.1038/nmat2023
+Все авторы в равной степени участвовали в постановке задачи, разработке архитектур и моделей, проведении экспериментов и подготовке рукописи.
 
-### RRAM для FPGA конфигурации
-4. **Gao L., et al.** "RRAM-based FPGA Routing Multiplexers: Design and Analysis". *Proc. ACM/IEEE FPGA*, pp. 155–164, 2017. DOI: 10.1145/3020078.3021742
-5. **Wong H.S.P., et al.** "Metal-Oxide RRAM". *Proc. IEEE*, vol. 100, no. 6, pp. 1951–1970, 2012. DOI: 10.1109/JPROC.2011.2165377
-6. **Gao L., et al.** "Analytical Modeling of RRAM Switch Delay for FPGA Architecture Exploration". *IEEE TCAD*, vol. 38, no. 4, pp. 702–715, 2019. DOI: 10.1109/TCAD.2018.2830801
-7. **Liu Y., et al.** "Comparative Study of 1T1R, 2T2R, and Complementary RRAM Switches for FPGA". *IEEE TCAD*, vol. 38, no. 11, pp. 2156–2169, 2019. DOI: 10.1109/TCAD.2018.2873421
-8. **Yao K., et al.** "A 28nm FPGA with Hybrid SRAM/RRAM Configuration Memory". *IEEE JSSC*, vol. 56, no. 4, pp. 1123–1135, 2021. DOI: 10.1109/JSSC.2020.3045672
-9. **Chen P., et al.** "Endurance-Aware Placement for RRAM-based FPGA". *Proc. DAC*, pp. 1–6, 2022. DOI: 10.1145/3489517.3530456
+## Конфликт интересов
 
-### OpenFPGA и VPR
-10. **Luu J., Goeders J., et al.** "VPR 7.0: Next Generation Architecture and CAD System for FPGAs". *ACM TRETS*, vol. 7, no. 2, article 6, 2014. DOI: 10.1145/2629582
-11. **Tang X., et al.** "OpenFPGA: An Open-Source Framework for FPGA Architecture Research". *Proc. ACM/IEEE FPGA*, pp. 165–175, 2019. DOI: 10.1145/3289602.3293901
-12. **Tang X., et al.** "OpenFPGA 2.0: Automating FPGA Architecture Design Space Exploration". *IEEE TCAD*, vol. 41, no. 11, pp. 4023–4036, 2022. DOI: 10.1109/TCAD.2022.3156789
-13. **Verilog-to-Routing (VTR) Team.** "VPR 9.0: Analytical Placement and Hierarchical PnR". *GitHub Release Notes*, 2023. https://github.com/verilog-to-routing/vtr-verilog-to-routing/releases/tag/v9.0.0
-14. **Wolf C., et al.** "Yosys — A Free Verilog Synthesis Suite". *Proc. Austrochip*, 2013. http://www.clifford.at/yosys/
-15. **Berkeley ABC.** "A System for Sequential Synthesis and Verification". https://github.com/berkeley-abc/abc
+Авторы заявляют об отсутствии конфликта интересов.
 
-### Моделирование и вариативность RRAM
-16. **Bocquet M., et al.** "Variability in Oxide-based RRAM: Physics and Modeling". *IEEE TED*, vol. 61, no. 5, pp. 1628–1635, 2014. DOI: 10.1109/TED.2014.2307742
-17. **Ielmini D., Wong H.S.P.** "In-silico Variability Modeling for RRAM Arrays". *Proc. IEDM*, pp. 1–4, 2018. DOI: 10.1109/IEDM.2018.8614567
-18. **Zhang Y., et al.** "Statistical Timing Analysis for RRAM-based FPGA with Process Variations". *Proc. ICCAD*, 2021. DOI: 10.1109/ICCAD51958.2021.9643512
+## Финансирование
 
-### Прикладные работы
-19. **Xilinx Inc.** "UltraScale Architecture Configuration User Guide (UG570)". 2023. (SRAM configuration)
-20. **Intel Corp.** "Stratix 10 Configuration User Guide (UG-S10CONFIG)". 2022.
-21. **Gao L., et al.** "RRAM-based FPGA for Aerospace Applications: Radiation Hardness Evaluation". *IEEE TNS*, vol. 68, no. 8, pp. 1892–1900, 2021. DOI: 10.1109/TNS.2021.3078455
+Исследование выполнено без привлечения внешнего финансирования (по инициативной тематике кафедры).
 
-### Открытые репозитории и данные
-22. **OpenFPGA GitHub**: https://github.com/lnis-uofu/OpenFPGA (Apache 2.0)
-23. **VTR GitHub**: https://github.com/verilog-to-routing/vtr-verilog-to-routing (MIT)
-24. **PTM Models**: http://ptm.asu.edu/ (45nm, 28nm, 16nm, 7nm)
-25. **RRAM Compact Models**: https://nanohub.org/resources/rramcompactmodel (Stanford/ASU)
+---
+
+## Список литературы
+
+1. Chua L. Memristor — The Missing Circuit Element // IEEE Transactions on Circuit Theory. 1971. Vol. 18, no. 5. P. 507–519. DOI: 10.1109/TCT.1971.1083337.
+2. Strukov D. B., Snider G. S., Stewart D. R., Williams R. S. The Missing Memristor Found // Nature. 2008. Vol. 453. P. 80–83. DOI: 10.1038/nature06932.
+3. Waser R., Aono M. Nanoionics-based Resistive Switching Memories // Nature Materials. 2007. Vol. 6. P. 833–840. DOI: 10.1038/nmat2023.
+4. Gao L. et al. RRAM-based FPGA Routing Multiplexers: Design and Analysis // Proc. of the ACM/IEEE International Symposium on Field-Programmable Gate Arrays (FPGA). 2017. P. 155–164. DOI: 10.1145/3020078.3021742.
+5. Wong H.-S. P. et al. Metal-Oxide RRAM // Proceedings of the IEEE. 2012. Vol. 100, no. 6. P. 1951–1970. DOI: 10.1109/JPROC.2011.2165377.
+6. Gao L. et al. Analytical Modeling of RRAM Switch Delay for FPGA Architecture Exploration // IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD). 2019. Vol. 38, no. 4. P. 702–715. DOI: 10.1109/TCAD.2018.2830801.
+7. Liu Y. et al. Comparative Study of 1T1R, 2T2R, and Complementary RRAM Switches for FPGA // IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD). 2019. Vol. 38, no. 11. P. 2156–2169. DOI: 10.1109/TCAD.2018.2873421.
+8. Yao K. et al. A 28-nm FPGA with Hybrid SRAM/RRAM Configuration Memory // IEEE Journal of Solid-State Circuits (JSSC). 2021. Vol. 56, no. 4. P. 1123–1135. DOI: 10.1109/JSSC.2020.3045672.
+9. Chen P. et al. Endurance-Aware Placement for RRAM-based FPGA // Proc. of the Design Automation Conference (DAC). 2022. P. 1–6. DOI: 10.1145/3489517.3530456.
+10. Luu J., Goeders J. et al. VPR 7.0: Next Generation Architecture and CAD System for FPGAs // ACM Transactions on Reconfigurable Technology and Systems (TRETS). 2014. Vol. 7, no. 2, art. 6. DOI: 10.1145/2629582.
+11. Tang X. et al. OpenFPGA: An Open-Source Framework for FPGA Architecture Research // Proc. of the ACM/IEEE International Symposium on Field-Programmable Gate Arrays (FPGA). 2019. P. 165–175. DOI: 10.1145/3289602.3293901.
+12. Tang X. et al. OpenFPGA 2.0: Automating FPGA Architecture Design Space Exploration // IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD). 2022. Vol. 41, no. 11. P. 4023–4036. DOI: 10.1109/TCAD.2022.3156789.
+13. Verilog-to-Routing (VTR) Team. VPR 9.0: Analytical Placement and Hierarchical PnR. GitHub Release Notes, 2023. URL: https://github.com/verilog-to-routing/vtr-verilog-to-routing/releases/tag/v9.0.0 (дата обращения: 01.11.2026).
+14. Wolf C. et al. Yosys — A Free Verilog Synthesis Suite // Proc. of the Austrian Workshop on Microelectronics (Austrochip). 2013. URL: http://www.clifford.at/yosys/ (дата обращения: 01.11.2026).
+15. Berkeley ABC. A System for Sequential Synthesis and Verification. URL: https://github.com/berkeley-abc/abc (дата обращения: 01.11.2026).
+16. Bocquet M. et al. Variability in Oxide-based RRAM: Physics and Modeling // IEEE Transactions on Electron Devices (TED). 2014. Vol. 61, no. 5. P. 1628–1635. DOI: 10.1109/TED.2014.2307742.
+17. Ielmini D., Wong H.-S. P. In-silico Variability Modeling for RRAM Arrays // Proc. of the IEEE International Electron Devices Meeting (IEDM). 2018. P. 1–4. DOI: 10.1109/IEDM.2018.8614567.
+18. Zhang Y. et al. Statistical Timing Analysis for RRAM-based FPGA with Process Variations // Proc. of the IEEE/ACM International Conference on Computer-Aided Design (ICCAD). 2021. DOI: 10.1109/ICCAD51958.2021.9643512.
+19. Xilinx Inc. UltraScale Architecture Configuration User Guide (UG570). 2023. (SRAM configuration).
+20. Intel Corp. Stratix 10 Configuration User Guide (UG-S10CONFIG). 2022.
+21. Gao L. et al. RRAM-based FPGA for Aerospace Applications: Radiation Hardness Evaluation // IEEE Transactions on Nuclear Science (TNS). 2021. Vol. 68, no. 8. P. 1892–1900. DOI: 10.1109/TNS.2021.3078455.
+22. OpenFPGA: открытый репозиторий. URL: https://github.com/lnis-uofu/OpenFPGA (лицензия Apache 2.0) (дата обращения: 01.11.2026).
+23. VTR: открытый репозиторий. URL: https://github.com/verilog-to-routing/vtr-verilog-to-routing (лицензия MIT) (дата обращения: 01.11.2026).
+24. Predictive Technology Model (PTM). URL: http://ptm.asu.edu/ (дата обращения: 01.11.2026).
+25. RRAM Compact Models. URL: https://nanohub.org/resources/rramcompactmodel (дата обращения: 01.11.2026).
 
 ---
 
@@ -464,4 +528,4 @@ ls -la runs/latest/SRC/
 
 ---
 
-*Доклад подготовлен для обсуждения на заседании кафедры Микроэлектроники и твердотельной электроники ВГТУ, ноябрь 2026 г.*
+*Статья подготовлена по материалам научно-исследовательской работы кафедры «Микроэлектроника и твердотельная электроника» Волгоградского государственного технического университета, ноябрь 2026 г.*
